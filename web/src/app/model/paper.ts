@@ -1,6 +1,6 @@
 export interface PaperQueryParameters {
-  type: number;
-  keywords: string;
+  type?: number;
+  keywords?: string;
 }
 export interface PaperParameters {
   authors: string[];
@@ -11,12 +11,12 @@ export interface PaperParameters {
   publishTime?: string;
 }
 export class Paper {
-  authors: string[];
-  title: string;
-  publishJournal: string;
-  paperAbstract: string;
-  url: string;
-  publishTime?: string;
+  authors: string[] = [];
+  title: string = '';
+  publishJournal: string = '';
+  paperAbstract: string = '';
+  url: string = '';
+  publishTime?: string = '';
 
   showAbstract: boolean;
 

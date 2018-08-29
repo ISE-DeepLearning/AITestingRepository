@@ -32,6 +32,7 @@ export class PaperService {
   }
 
   uploadPaper(paper: Paper): Observable<object> {
+    console.log(paper);
     return this.http.post(Config.base_url + '/paper',
       paper, {
       responseType: 'json',

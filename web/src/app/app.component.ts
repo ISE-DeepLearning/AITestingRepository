@@ -21,9 +21,13 @@ export class AppComponent {
     private route: ActivatedRoute,
     private location: Location
   ) {
-    let path: string = location.path();
-    this.selectedNav = path.substring(1, path.length);
-    if (this.selectedNav == '') {
+    if (location) {
+      let path: string = location.path();
+      this.selectedNav = path.substring(1, path.length);
+      if (this.selectedNav == '') {
+        this.selectedNav = 'home';
+      }
+    } else {
       this.selectedNav = 'home';
     }
     this.types = [
@@ -32,7 +36,6 @@ export class AppComponent {
     ];
     this.queryParams = {
       type: Config.type_title,
-      keywords: ''
     };
   }
 

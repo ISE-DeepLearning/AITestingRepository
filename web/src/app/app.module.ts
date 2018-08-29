@@ -11,10 +11,12 @@ import { RadioButtonModule } from "primeng/primeng";
 import { ButtonModule } from "primeng/primeng";
 import { PaginatorModule } from "primeng/primeng";
 import { FieldsetModule } from 'primeng/fieldset';
-import { ChipsModule } from 'primeng/chips';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaperComponent } from './paper/paper.component';
 import { PaperEditComponent } from './paper-edit/paper-edit.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { PaperEditComponent } from './paper-edit/paper-edit.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule,
     DropdownModule,
     InputTextModule,
@@ -34,7 +37,8 @@ import { PaperEditComponent } from './paper-edit/paper-edit.component';
     ButtonModule,
     PaginatorModule,
     FieldsetModule,
-    ChipsModule
+    CalendarModule,
+    InputTextareaModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]
