@@ -17,7 +17,9 @@ export class PaperService {
   getPapers(type: number, keywords: string, currentPage: number, pageSize: number): Observable<object> {
     const params: HttpParams = new HttpParams();
     params.append('type', '' + type);
-    params.append('keywords', keywords);
+    if (Config.isValid(keywords)) {
+      params.append('keywords', keywords);
+    }
     params.append('currentPage', '' + currentPage);
     params.append('pageSize', '' + pageSize);
     return this.http.get(Config.base_url + '/paper/list', {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Paper } from "../model/paper";
 import { ActivatedRoute } from "@angular/router";
 import { Config } from "../config";
+import { PaperService } from "../service/paper.service";
 
 @Component({
   selector: 'app-paper',
@@ -20,7 +21,8 @@ export class PaperComponent implements OnInit {
   keywords: string;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private paperService: PaperService
   ) {
     const params = route.snapshot.queryParamMap;
     this.type = Config.isValid(params.get('type')) ? parseInt(params.get('type')) : Config.type_title;
@@ -48,7 +50,14 @@ export class PaperComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.type);
+    this.searchPaper();
+  }
+
+  searchPaper(): void {
+    this.paperService.getPapers(this.type, this.keywords, this.currentPage, this.pageSize)
+      .subscribe(res => {
+        console.log(res);
+      });
   }
 
   toggleAbstract(paper: Paper) {

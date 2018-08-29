@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { PaperQueryParameters } from "./model/paper";
 import { ActivatedRoute } from "@angular/router";
+import { Config } from "./config";
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,7 @@ export class AppComponent {
       { label: 'By author name', value: 1 }
     ];
     this.queryParams = {
-      type: 1,
+      type: Config.type_title,
       keywords: ''
     };
   }
