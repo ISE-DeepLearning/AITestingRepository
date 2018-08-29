@@ -23,7 +23,7 @@ import java.util.List;
 public class Paper {
 
     @Id
-    private Long id;
+    private String id;
 
     //标题
     private String title;
