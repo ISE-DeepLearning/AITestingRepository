@@ -5,7 +5,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/" [class.active]="selectedNav === 'home'" (click)="onSelectNav('home')">Home</a>
-        <a class="nav-item nav-link" routerLink="/paper" [class.active]="selectedNav === 'paper'" (click)="onSelectNav('paper')">Paper</a>
+        <a class="nav-item nav-link" routerLink="/paper" [queryParams]="queryParams" [class.active]="selectedNav === 'paper'" (click)="onSelectNav('paper')">Paper</a>
       </div>
     </div>
   </div>
@@ -27,12 +27,12 @@
           <h4>Quick Search</h4>
         </div>
         <div class="form-group">
-          <p-dropdown [options]="types"></p-dropdown>
+          <p-dropdown [options]="types" [(ngModel)]="queryParams.type"></p-dropdown>
         </div>
         <div class="form-group">
           <div class="ui-inputgroup">
-            <input type="text" pInputText placeholder="Keyword">
-            <button pButton type="button" label="Search"></button>
+            <input type="text" pInputText placeholder="Keyword" [(ngModel)]="queryParams.keywords">
+            <button pButton type="button" label="Search" routerLink="/paper" [queryParams]="queryParams"></button>
           </div>
         </div>
         <div class="form-group">
