@@ -1,7 +1,10 @@
 package edu.nju.ise.repository.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
@@ -14,16 +17,19 @@ import java.util.List;
  */
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Document(collection = "paper_data")
 public class Paper {
 
     @Id
-    private String id;
+    private Long id;
 
     //标题
     private String title;
 
     //作者
-    private List<Author> authors;
+    private List<String> authors;
 
     //论文链接
     private String url;
@@ -32,11 +38,15 @@ public class Paper {
     @Field("publish_time")
     private String publishTime;
 
+    //发表刊物
+    @Field("publish_journal")
+    private String publishJournal;
+
     //摘要
     @Field("paper_abstract")
     private String paperAbstract;
 
-    //标签
-    private List<Label> labels;
+    //标签(暂不启用）
+//    private List<Label> labels;
 
 }
