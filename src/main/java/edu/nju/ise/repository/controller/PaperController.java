@@ -61,7 +61,7 @@ public class PaperController {
      */
     @GetMapping
     @RequestMapping("findByKeyword")
-    public ResponseData findByKeyword(@RequestParam Integer type, String keywords,
+    public ResponseData findByKeyword(@RequestParam Integer type, @RequestParam(required = false) String keywords,
                                       @RequestParam Integer currentPage, @RequestParam Integer pageSize){
         //参数判断
         currentPage = currentPage < 1 ? 1 : currentPage;
