@@ -1,7 +1,8 @@
 package edu.nju.ise.repository.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import lombok.NoArgsConstructor;
 
 /**
  * 类说明：作者
@@ -11,10 +12,12 @@ import org.springframework.data.annotation.Id;
  */
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author {
 
-    @Id
-    private String id;
+//    @Id
+//    private String id;
 
     //名字
     private String name;
