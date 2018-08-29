@@ -1,35 +1,30 @@
-package edu.nju.ise.repository.model;
+package edu.nju.ise.repository.bean;
 
+import edu.nju.ise.repository.model.Author;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
 /**
- * 类说明：论文类
+ * 类说明：提交的论文信息
  * 创建者：Zeros
- * 创建时间：2018/8/28 下午3:21
- * 包名：edu.nju.ise.repository.model
+ * 创建时间：2018/8/29 下午5:47
+ * 包名：edu.nju.ise.repository.bean
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "paper_data")
-public class Paper {
-
-    @Id
-    private String id;
+public class PaperCommand {
 
     //标题
     private String title;
 
     //作者
-    private List<Author> authors;
+    private List<String> authors;
 
     //论文链接
     private String url;
@@ -48,5 +43,4 @@ public class Paper {
 
     //标签(暂不启用）
 //    private List<Label> labels;
-
 }

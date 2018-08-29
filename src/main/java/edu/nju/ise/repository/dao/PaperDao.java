@@ -24,11 +24,4 @@ public interface PaperDao extends MongoRepository<Paper, String> {
      */
     Page<Paper> findByTitleLike(String title, Pageable pageable);
 
-    /**
-     * 根据作者模糊匹配
-     * @param authors 作者关键字
-     * @param pageable 分页
-     * @return
-     */
-    Page<Paper> findByAuthorsLike(String authors, Pageable pageable);
 }

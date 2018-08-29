@@ -1,7 +1,7 @@
 package edu.nju.ise.repository.service;
 
+import edu.nju.ise.repository.bean.ResponsePage;
 import edu.nju.ise.repository.model.Paper;
-import org.springframework.data.domain.Page;
 
 /**
  * 类说明：论文服务类
@@ -27,5 +27,5 @@ public interface PaperService {
      * @param pageSize 每页数量
      * @return
      */
-    Page<Paper> findPageByKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize);
+    ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize);
 }

@@ -1,9 +1,13 @@
 package edu.nju.ise.repository.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import edu.nju.ise.repository.bean.ResponsePage;
 import edu.nju.ise.repository.dao.PaperDao;
+import edu.nju.ise.repository.dao.PaperTemplateDao;
 import edu.nju.ise.repository.model.Paper;
 import edu.nju.ise.repository.service.PaperService;
 import edu.nju.ise.repository.util.Constants;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +26,8 @@ public class PaperServiceImpl implements PaperService {
 
     @Autowired
     private PaperDao paperDao;
+    @Autowired
+    private PaperTemplateDao paperTemplate;
 
     @Override
     public Integer createPaper(Paper paper) {
@@ -33,14 +39,19 @@ public class PaperServiceImpl implements PaperService {
      * 分页查询所有论文，按时间倒序排列
      */
     @Override
-    public Page<Paper> findPageByKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize) {
+    public ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize) {
         PageRequest pageable = buildPageRequest(currentPage, pageSize, null);
+        ResponsePage<Paper> responsePage = new ResponsePage<>(currentPage, pageSize);
         if(keywords == null || "".equals(keywords)){
-            return paperDao.findAll(pageable);
+            Page<Paper> result = paperDao.findAll(pageable);
+            BeanUtils.copyProperties(result, responsePage);
+            return responsePage;
         }else if(type.equals(Constants.SEARCH_TYPE_TITLE)){
-            return paperDao.findByTitleLike(keywords, pageable);
+            Page<Paper> result =  paperDao.findByTitleLike(keywords, pageable);
+            BeanUtils.copyProperties(result, responsePage);
+            return responsePage;
         }else if(type.equals(Constants.SEARCH_TYPE_AUTHOR)){
-            return paperDao.findByAuthorsLike(keywords, pageable);
+            return paperTemplate.findByAuthorsLike(keywords, pageable);
         }
         return null;
     }

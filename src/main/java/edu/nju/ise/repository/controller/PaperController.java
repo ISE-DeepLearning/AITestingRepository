@@ -1,12 +1,18 @@
 package edu.nju.ise.repository.controller;
 
+import edu.nju.ise.repository.bean.PaperCommand;
 import edu.nju.ise.repository.bean.ResponseData;
+import edu.nju.ise.repository.bean.ResponsePage;
+import edu.nju.ise.repository.model.Author;
 import edu.nju.ise.repository.model.Paper;
 import edu.nju.ise.repository.service.PaperService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -31,7 +37,15 @@ public class PaperController {
      */
     @PostMapping
     @RequestMapping("create")
-    public ResponseData createPaper(@RequestBody Paper paper, HttpServletRequest request){
+    public ResponseData createPaper(@RequestBody PaperCommand paperCommand, HttpServletRequest request){
+        Paper paper = new Paper();
+        BeanUtils.copyProperties(paperCommand, paper);
+        List<Author> authorList = new ArrayList<>();
+        for(String name: paperCommand.getAuthors()){
+            Author author = new Author(name);
+            authorList.add(author);
+        }
+        paper.setAuthors(authorList);
         Integer row = paperService.createPaper(paper);
         return row == 1 ? ResponseData.ok(null) : ResponseData.badRequest("提交论文失败！");
     }
@@ -49,7 +63,11 @@ public class PaperController {
     @RequestMapping("findByKeyword")
     public ResponseData findByKeyword(@RequestParam Integer type, @RequestParam(required = false) String keywords,
                                       @RequestParam Integer currentPage, @RequestParam Integer pageSize){
-        Page<Paper> paperList = paperService.findPageByKeyword(type, keywords, currentPage, pageSize);
+        //参数判断
+        currentPage = currentPage < 1 ? 1 : currentPage;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+        //查询结果
+        ResponsePage<Paper> paperList = paperService.findPageByKeyword(type, keywords, currentPage, pageSize);
         return ResponseData.ok(paperList);
     }
 
