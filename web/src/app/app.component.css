@@ -1,0 +1,21 @@
+body {
+  font-family: -apple-system,SF UI Text,Helvetica Neue,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Zen Hei,sans-serif;
+  font-weight: lighter;
+}
+#main-content {
+  margin-top: 6rem;
+}
+.navbar-brand {
+  font-size: 1.5rem;
+}
+.form-group {
+  width: 100%;
+}
+#right-nav {
+  padding-left: 15px;
+  border-left: 1px solid gray;
+  box-sizing: border-box;
+}
+#right-nav .row {
+  margin: 0;
+}
