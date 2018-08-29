@@ -1,3 +1,24 @@
 <div class="row">
-
+  <h4>
+    Paper List
+  </h4>
+  <div class="paper-list col-md-12" *ngFor="let paper of papers">
+    <div class="paper">
+      <p>{{ paper.getAuthorsStr() }}</p>
+      <p><strong>{{ paper.title }}</strong></p>
+      <p>{{ paper.publishJournal }}</p>
+      <div class="text-right">
+        <a (click)="toggleAbstract(paper)">Abstract</a>
+        <a href="{{ paper.url }}" target="_blank">URL</a>
+      </div>
+      <p [hidden]="!paper.showAbstract">
+        <strong>Abstract: </strong>{{ paper.paperAbstract }}
+      </p>
+    </div>
+  </div>
+  <div class="pagination">
+    <p-paginator [rows]="10"
+                 [totalRecords]="120"
+                 (onPageChange)="paginate($event)"></p-paginator>
+  </div>
 </div>
