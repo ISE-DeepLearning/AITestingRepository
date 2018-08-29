@@ -4,12 +4,10 @@ import edu.nju.ise.repository.bean.ResponseData;
 import edu.nju.ise.repository.model.Paper;
 import edu.nju.ise.repository.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * 类说明：论文Controller
@@ -37,6 +35,24 @@ public class PaperController {
         Integer row = paperService.createPaper(paper);
         return row == 1 ? ResponseData.ok(null) : ResponseData.badRequest("提交论文失败！");
     }
+
+
+    /**
+     * 分页查询页数
+     * @param type 查询类型 1-paper,2-author
+     * @param keywords 关键字
+     * @param currentPage 当前页数 从1开始计数
+     * @param pageSize 每页数量
+     * @return
+     */
+    @GetMapping
+    @RequestMapping("findByKeyword")
+    public ResponseData findByKeyword(@RequestParam Integer type, String keywords,
+                                      @RequestParam Integer currentPage, @RequestParam Integer pageSize){
+        Page<Paper> paperList = paperService.findPageByKeyword(type, keywords, currentPage, pageSize);
+        return ResponseData.ok(paperList);
+    }
+
 
 
 
