@@ -2,7 +2,6 @@ package edu.nju.ise.repository.dao;
 
 import edu.nju.ise.repository.model.Paper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -31,5 +30,5 @@ public interface PaperDao extends MongoRepository<Paper, String> {
      * @param pageable 分页
      * @return
      */
-    Page<Paper> findByAuthorsLike(String authors, PageRequest pageable);
+    Page<Paper> findByAuthorsLike(String authors, Pageable pageable);
 }
