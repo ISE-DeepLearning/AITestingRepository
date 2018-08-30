@@ -13,6 +13,9 @@ import { PaginatorModule } from "primeng/primeng";
 import { FieldsetModule } from 'primeng/fieldset';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaperComponent } from './paper/paper.component';
 import { PaperEditComponent } from './paper-edit/paper-edit.component';
@@ -38,7 +41,10 @@ import { HttpClientModule } from "@angular/common/http";
     PaginatorModule,
     FieldsetModule,
     CalendarModule,
-    InputTextareaModule
+    InputTextareaModule,
+    MessagesModule,
+    MessageModule,
+    ToastModule,
   ],
   providers: [],
   bootstrap: [ AppComponent ]

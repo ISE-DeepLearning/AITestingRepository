@@ -3,3 +3,7 @@ spring:
     mongodb:
       uri: mongodb://localhost:27017
       database: aitest_repository
+  mvc:
+    static-path-pattern: /**
+  resources:
+    static-locations: classpath:/static/

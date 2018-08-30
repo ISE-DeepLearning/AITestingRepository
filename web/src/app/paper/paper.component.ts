@@ -3,11 +3,13 @@ import { Paper } from "../model/paper";
 import { ActivatedRoute } from "@angular/router";
 import { Config } from "../config";
 import { PaperService } from "../service/paper.service";
+import { MessageService } from "primeng/api";
 
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
-  styleUrls: ['./paper.component.css']
+  styleUrls: ['./paper.component.css'],
+  providers: [ MessageService ]
 })
 export class PaperComponent implements OnInit {
 
@@ -22,27 +24,13 @@ export class PaperComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private paperService: PaperService
+    private paperService: PaperService,
+    private messageService: MessageService
   ) {
     const params = route.snapshot.queryParamMap;
     this.type = Config.isValid(params.get('type')) ? parseInt(params.get('type')) : Config.type_title;
     this.keywords = params.get('keywords');
-    this.papers = [
-      new Paper({
-        authors: ['Mark Trakhtenbrot'],
-        title: 'Implementation-Oriented Mutation Testing of Statechart Models',
-        publishJournal: 'Proceedings of the 5th International Workshop on Mutation Analysis (MUTATION\'10)Paris, France, 6 April 2010.',
-        paperAbstract: 'Available soon...',
-        url: 'http://www.google.com/search?q=Implementation-Oriented Mutation Testing of Statechart Models'
-      }),
-      new Paper({
-        authors: ['Mark Trakhtenbrot', 'Nicos Malevris', 'Maria Kallia'],
-        title: 'Implementation-Oriented Mutation Testing of Statechart Models',
-        publishJournal: 'Proceedings of the 5th International Workshop on Mutation Analysis (MUTATION\'10)Paris, France, 6 April 2010.',
-        paperAbstract: 'Available soon...',
-        url: 'http://www.google.com/search?q=Implementation-Oriented Mutation Testing of Statechart Models'
-      }),
-    ];
+    this.papers = [];
     this.currentPage = 1;
     this.pageSize = 10;
     this.totalPage = 0;
@@ -66,6 +54,10 @@ export class PaperComponent implements OnInit {
 
   paginate($event): void {
 
+  }
+
+  showError(msg: string) {
+    this.messageService.add({ key: 'info', severity: 'error', summary: 'Error Message', detail: msg });
   }
 
 }

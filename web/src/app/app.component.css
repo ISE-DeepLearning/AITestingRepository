@@ -3,7 +3,8 @@ body {
   font-weight: lighter;
 }
 #main-content {
-  margin-top: 6rem;
+  /*margin-top: 6rem;*/
+  margin-top: 2rem;
 }
 .navbar-brand {
   font-size: 1.5rem;

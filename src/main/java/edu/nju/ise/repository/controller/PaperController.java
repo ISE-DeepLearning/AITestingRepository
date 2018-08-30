@@ -24,6 +24,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/paper")
+@CrossOrigin(origins = { "http://localhost:4200", "null" })
 public class PaperController {
 
     @Autowired
@@ -38,6 +39,7 @@ public class PaperController {
     @PostMapping
     @RequestMapping("create")
     public ResponseData createPaper(@RequestBody PaperCommand paperCommand, HttpServletRequest request){
+        System.out.println(paperCommand.getUrl());
         Paper paper = new Paper();
         BeanUtils.copyProperties(paperCommand, paper);
         List<Author> authorList = new ArrayList<>();
