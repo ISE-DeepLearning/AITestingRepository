@@ -62,6 +62,7 @@ public class PaperServiceImpl implements PaperService {
      */
     @Override
     public List<Paper> isExistTitle(String title) {
+        title = title.trim();
         return paperDao.findByTitle(title);
     }
 
