@@ -1,7 +1,7 @@
 <div class="row">
   <h4>Paper List</h4>
-  <div class="paper-list col-md-12" *ngFor="let paper of papers">
-    <div class="paper">
+  <div class="paper-list col-md-12">
+    <div class="paper" *ngFor="let paper of papers">
       <p>{{ paper.getAuthorsStr() }}</p>
       <p><strong>{{ paper.title }}</strong></p>
       <p>{{ paper.publishJournal }}</p>
@@ -14,9 +14,13 @@
       </p>
     </div>
   </div>
+  <div class="pagination" *ngIf="totalElements == 0">
+    <span>No results</span>
+  </div>
   <div class="pagination">
-    <p-paginator [rows]="10"
-                 [totalRecords]="120"
+    <p-paginator *ngIf="totalElements != 0"
+                 [rows]="pageSize"
+                 [totalRecords]="totalElements"
                  (onPageChange)="paginate($event)"></p-paginator>
   </div>
 </div>

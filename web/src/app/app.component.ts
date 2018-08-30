@@ -31,8 +31,8 @@ export class AppComponent {
       this.selectedNav = 'home';
     }
     this.types = [
-      { label: 'By paper title', value: 0 },
-      { label: 'By author name', value: 1 }
+      { label: 'By paper title', value: Config.type_title },
+      { label: 'By author name', value: Config.type_author }
     ];
     this.queryParams = {
       type: Config.type_title,

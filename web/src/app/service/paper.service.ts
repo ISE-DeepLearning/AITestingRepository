@@ -20,15 +20,13 @@ export class PaperService {
   }
 
   getPapers(type: number, keywords: string, currentPage: number, pageSize: number): Observable<object> {
-    const params: HttpParams = new HttpParams();
-    params.append('type', '' + type);
+    let url: string = '';
     if (Config.isValid(keywords)) {
-      params.append('keywords', keywords);
+      url = `${Config.base_url}/api/paper/findByKeyword?type=${type}&currentPage=${currentPage}&pageSize=${pageSize}&keywords=${keywords}`;
+    } else {
+      url = `${Config.base_url}/api/paper/findByKeyword?type=${type}&currentPage=${currentPage}&pageSize=${pageSize}`;
     }
-    params.append('currentPage', '' + currentPage);
-    params.append('pageSize', '' + pageSize);
-    return this.http.get(Config.base_url + '/paper/list', {
-      params: params,
+    return this.http.get(url, {
       responseType: 'json',
       withCredentials: true
     }).pipe(
@@ -71,7 +69,6 @@ export class PaperService {
       console.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
-      result['success'] = false;
       result['message'] = error.message;
 
       return of(result);

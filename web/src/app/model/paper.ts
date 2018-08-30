@@ -3,7 +3,7 @@ export interface PaperQueryParameters {
   keywords?: string;
 }
 export interface PaperParameters {
-  authors: string[];
+  authors: any[];
   title: string;
   publishJournal: string;
   paperAbstract: string;
@@ -11,7 +11,7 @@ export interface PaperParameters {
   publishTime?: string;
 }
 export class Paper {
-  authors: string[] = [];
+  authors: any[] = [];
   title: string = '';
   publishJournal: string = '';
   paperAbstract: string = '';
@@ -34,9 +34,9 @@ export class Paper {
     let result: string = '';
     for (let i = 0; i < this.authors.length; i++) {
       if (i == 0) {
-        result += this.authors[i];
+        result += this.authors[i]['name'];
       } else {
-        result += (' and ' + this.authors[i]);
+        result += (' and ' + this.authors[i]['name']);
       }
     }
     return result;
