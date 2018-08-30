@@ -1,6 +1,5 @@
 package edu.nju.ise.repository.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import edu.nju.ise.repository.bean.ResponsePage;
 import edu.nju.ise.repository.dao.PaperDao;
 import edu.nju.ise.repository.dao.PaperTemplateDao;
@@ -13,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 类说明：论文Service实现类
@@ -54,6 +55,15 @@ public class PaperServiceImpl implements PaperService {
             return paperTemplate.findByAuthorsLike(keywords, pageable);
         }
         return null;
+    }
+
+    /**
+     * 搜索论文标题是否已存在
+     */
+    @Override
+    public List<Paper> isExistTitle(String title) {
+        title = title.trim();
+        return paperDao.findByTitle(title);
     }
 
 
