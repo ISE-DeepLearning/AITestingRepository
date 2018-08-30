@@ -10,14 +10,10 @@ import { catchError } from "rxjs/operators";
 })
 export class PaperService {
 
-  header: HttpHeaders;
 
   constructor(
     private http: HttpClient
-  ) {
-    this.header = new HttpHeaders();
-    this.header.append("Access-Control-Allow-Origin", "*");
-  }
+  ) { }
 
   getPapers(type: number, keywords: string, currentPage: number, pageSize: number): Observable<object> {
     let url: string = '';
@@ -35,7 +31,8 @@ export class PaperService {
   }
 
   uploadPaper(paper: Paper): Observable<object> {
-    return this.http.post( `${Config.base_url}/api/paper/create`,
+    const url: string = `${Config.base_url}/api/paper/create`;
+    return this.http.post( url,
       paper, {
       responseType: 'json',
       withCredentials: true
@@ -45,8 +42,8 @@ export class PaperService {
   }
 
   checkTitle(title: string): Observable<object> {
-    return this.http.post(`${Config.base_url}/test`,
-      title, {
+    const url: string = `${Config.base_url}/api/paper/isExistTitle?title=${title}`;
+    return this.http.get(url, {
       responseType: 'json',
       withCredentials: true
     }).pipe(

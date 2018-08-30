@@ -5,12 +5,12 @@
 <div class="row">
   <div class="form-group">
     <h5>Title</h5>
-    <input type="text" pInputText placeholder="Title" class="col-md-12" [(ngModel)]="paper.title"/>
+    <input type="text" pInputText class="col-md-12" [(ngModel)]="paper.title" (change)="checkTitle(paper.title)"/>
   </div>
   <div class="form-group">
     <h5>Authors</h5>
     <div class="ui-inputgroup col-md-12">
-      <input type="text" pInputText placeholder="Author name" class="col-md-12" [(ngModel)]="authorName"/>
+      <input type="text" pInputText class="col-md-12" [(ngModel)]="authorName"/>
       <button pButton type="button" icon="pi pi-plus" class="ui-button-info" (click)="addAuthor(authorName)"></button>
     </div>
     <div class="authors-list">
@@ -31,7 +31,7 @@
   </div>
   <div class="form-group">
     <h5>URL</h5>
-    <input type="text" pInputText placeholder="URL" class="col-md-12" [(ngModel)]="paper.url"/>
+    <input type="text" pInputText class="col-md-12" [(ngModel)]="paper.url"/>
   </div>
   <div class="form-group">
     <h5>Abstract</h5>
@@ -40,7 +40,7 @@
   <div class="form-group">
     <button pButton type="button" icon="pi pi-file" label="Save" class="ui-button-success" (click)="uploadPaper()"></button>
     &nbsp;&nbsp;
-    <button pButton type="button" icon="pi pi-refresh" label="Reset" class="ui-button-secondary"></button>
+    <button pButton type="button" icon="pi pi-refresh" label="Reset" class="ui-button-secondary" (click)="reset()"></button>
   </div>
 </div>
 <p-toast key="info"></p-toast>

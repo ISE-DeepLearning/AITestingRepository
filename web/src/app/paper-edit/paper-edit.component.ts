@@ -77,13 +77,44 @@ export class PaperEditComponent implements OnInit {
       });
   }
 
+  reset(): void {
+    this.paper = new Paper({
+      authors: [],
+      title: '',
+      publishTime: '',
+      paperAbstract: '',
+      publishJournal: '',
+      url: ''
+    });
+  }
+
   showError(msg: string) {
     this.messageService.add({ key: 'info', severity: 'error', summary: 'Error Message', detail: msg });
   }
 
-  checkTitle(title: string) {
-    if (Config.isValid(title)) {
+  showWarning(msg: string) {
+    this.messageService.add({ key: 'info', severity: 'warn', summary: 'Warn Message', detail: msg });
+  }
 
+  showInfo(msg: string) {
+    this.messageService.add({ key: 'info', severity: 'info', summary: 'Info Message', detail: msg });
+  }
+
+  checkTitle(title: string) {
+    console.log(title);
+    if (Config.isValid(title)) {
+      this.paperService.checkTitle(title)
+        .subscribe(res => {
+          if (res[ 'code' ] != 200) {
+            this.showError(res[ 'message' ]);
+            return;
+          }
+          const data: number = res[ 'data' ];
+          if (data > 0) {
+            this.showInfo('Paper exists!');
+            return;
+          }
+        })
     }
   }
 
