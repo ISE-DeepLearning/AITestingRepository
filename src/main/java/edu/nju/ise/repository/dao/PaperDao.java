@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 类说明：论文Dao
  * 创建者：Zeros
@@ -24,4 +26,10 @@ public interface PaperDao extends MongoRepository<Paper, String> {
      */
     Page<Paper> findByTitleLike(String title, Pageable pageable);
 
+    /**
+     * 搜索论文标题是否已存在
+     * @param title
+     * @return
+     */
+    List<Paper> findByTitle(String title);
 }

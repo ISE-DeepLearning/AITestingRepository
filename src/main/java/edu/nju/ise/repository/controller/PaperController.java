@@ -9,6 +9,7 @@ import edu.nju.ise.repository.service.PaperService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class PaperController {
 
     /**
      * 提交论文
-     * @param paper
+     * @param paperCommand
      * @param request
      * @return
      */
@@ -70,6 +71,21 @@ public class PaperController {
         ResponsePage<Paper> paperList = paperService.findPageByKeyword(type, keywords, currentPage, pageSize);
         return ResponseData.ok(paperList);
     }
+
+
+    /**
+     * 搜索论文标题是否已存在
+     * @param title 标题
+     * @return
+     */
+    @GetMapping
+    @RequestMapping("isExistTitle")
+    public ResponseData isExistTitle(@RequestParam String title){
+        List<Paper> paperList = paperService.isExistTitle(title);
+        return CollectionUtils.isEmpty(paperList) ? ResponseData.ok(0) : ResponseData.ok(paperList.size());
+    }
+
+
 
 
 

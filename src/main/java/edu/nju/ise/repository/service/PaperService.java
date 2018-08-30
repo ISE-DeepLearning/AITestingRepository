@@ -3,6 +3,8 @@ package edu.nju.ise.repository.service;
 import edu.nju.ise.repository.bean.ResponsePage;
 import edu.nju.ise.repository.model.Paper;
 
+import java.util.List;
+
 /**
  * 类说明：论文服务类
  * 创建者：Zeros
@@ -28,4 +30,11 @@ public interface PaperService {
      * @return
      */
     ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize);
+
+    /**
+     * 搜索论文标题是否已存在
+     * @param title 标题
+     * @return
+     */
+    List<Paper> isExistTitle(String title);
 }
