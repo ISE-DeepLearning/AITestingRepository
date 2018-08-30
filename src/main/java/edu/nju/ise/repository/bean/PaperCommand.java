@@ -30,15 +30,12 @@ public class PaperCommand {
     private String url;
 
     //发表时间
-    @Field("publish_time")
     private String publishTime;
 
     //发表刊物
-    @Field("publish_journal")
     private String publishJournal;
 
     //摘要
-    @Field("paper_abstract")
     private String paperAbstract;
 
     //标签(暂不启用）
