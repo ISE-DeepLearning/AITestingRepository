@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-import { Paper } from "../model/paper";
+import { LatexPaperInfo, Paper } from "../model/paper";
 import { Config } from "../config";
 import { catchError } from "rxjs/operators";
 
@@ -41,7 +41,7 @@ export class PaperService {
     );
   }
 
-  uploadLatexInfo(latexInfo: object): Observable<object> {
+  uploadLatexInfo(latexInfo: LatexPaperInfo): Observable<object> {
     const url: string = `${Config.base_url}/api/paper/latexcreate`;
     return this.http.post(url, latexInfo, {
       responseType: 'json',

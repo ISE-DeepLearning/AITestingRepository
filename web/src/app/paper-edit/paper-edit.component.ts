@@ -91,6 +91,22 @@ export class PaperEditComponent implements OnInit {
 
   uploadLatexInfo(): void {
     console.log(this.latexInfo);
+    if (!Config.isValid(this.latexInfo.info)) {
+      this.showError("Info cannot be empty!");
+      return;
+    }
+    if (!Config.isValid(this.latexInfo.url)) {
+      this.showError("URL cannot be empty!");
+    }
+    this.paperService.uploadLatexInfo(this.latexInfo)
+      .subscribe(res => {
+        console.log(res);
+        if (res['code'] != 200) {
+          this.showError(res['message']);
+          return;
+        }
+        this.showInfo("Success!");
+      });
   }
 
   reset(): void {
