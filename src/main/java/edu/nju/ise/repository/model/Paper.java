@@ -28,6 +28,10 @@ public class Paper {
     //标题
     private String title;
 
+    //搜索标题
+    @Field("search_title")
+    private String searchTitle;
+
     //作者
     private List<Author> authors;
 

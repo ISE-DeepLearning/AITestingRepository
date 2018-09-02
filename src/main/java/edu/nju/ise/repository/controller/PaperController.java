@@ -51,14 +51,19 @@ public class PaperController {
             authorList.add(author);
         }
         paper.setAuthors(authorList);
+        paper.setSearchTitle(paperCommand.getTitle().toLowerCase());
         Integer row = paperService.createPaper(paper);
         return row == 1 ? ResponseData.ok(null) : ResponseData.badRequest("提交论文失败！");
     }
 
     @PostMapping(name = "latexcreate")
     public ResponseData latexCreate(@RequestBody LatexCommand latexCommand, HttpServletRequest request) {
-
-        return null;
+        if(latexCommand == null){
+            return ResponseData.badRequest("参数不能为空。");
+        }
+        Paper paper = latexCommand.parsePaper();
+        Integer row = paperService.createPaper(paper);
+        return row == 1 ? ResponseData.ok(null) : ResponseData.badRequest("提交论文失败！");
     }
 
 
