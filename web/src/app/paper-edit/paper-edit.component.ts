@@ -16,6 +16,8 @@ export class PaperEditComponent implements OnInit {
 
   authorName: string;
 
+  latexInfo: object;
+
   constructor(
     private paperService: PaperService,
     private messageService: MessageService
@@ -28,6 +30,7 @@ export class PaperEditComponent implements OnInit {
       publishJournal: '',
       url: ''
     });
+    this.latexInfo = {};
   }
 
   ngOnInit() {
@@ -74,7 +77,16 @@ export class PaperEditComponent implements OnInit {
     this.paperService.uploadPaper(this.paper)
       .subscribe(res => {
         console.log(res);
+        if (res['code'] != 200) {
+          this.showError(res['message']);
+          return;
+        }
+        this.showInfo('Success!');
       });
+  }
+
+  uploadLatexInfo(): void {
+    console.log(this.latexInfo);
   }
 
   reset(): void {
@@ -117,6 +129,5 @@ export class PaperEditComponent implements OnInit {
         })
     }
   }
-
 
 }

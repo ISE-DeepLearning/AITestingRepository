@@ -41,6 +41,16 @@ export class PaperService {
     );
   }
 
+  uploadLatexInfo(latexInfo: object): Observable<object> {
+    const url: string = `${Config.base_url}/api/paper/latexcreate`;
+    return this.http.post(url, latexInfo, {
+      responseType: 'json',
+      withCredentials: true
+    }).pipe(
+      catchError(this.handleError('uploadLatexInfo', {}))
+    );
+  }
+
   checkTitle(title: string): Observable<object> {
     const url: string = `${Config.base_url}/api/paper/isExistTitle?title=${title}`;
     return this.http.get(url, {

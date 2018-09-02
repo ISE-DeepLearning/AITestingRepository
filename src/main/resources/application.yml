@@ -13,9 +13,9 @@ spring:
       port: 27017
 
   mvc:
-    static-path-pattern: /**, /paper/**, /paper/edit/**
+    static-path-pattern: /**
   resources:
-    static-locations: classpath:/static/
+    static-locations: classpath:/static/web
 
 # logging config
 logging:

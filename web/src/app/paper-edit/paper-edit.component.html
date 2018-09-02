@@ -4,6 +4,17 @@
 <br>
 <div class="row">
   <div class="form-group">
+    <h5>Latex upload</h5>
+    <textarea pInputTextarea class="col-sm-12" [(ngModel)]="latexInfo['info']" [rows]="5"></textarea>
+  </div>
+  <div class="form-group">
+    <h5>Abstract</h5>
+    <textarea pInputTextarea class="col-sm-12" [(ngModel)]="latexInfo['paperAbstract']" [rows]="5"></textarea>
+  </div>
+  <div class="form-group" style="border-bottom: 1px solid black; padding-bottom: 20px">
+    <button pButton type="button" icon="pi pi-file" label="Save" class="ui-button-success" (click)="uploadLatexInfo()"></button>
+  </div>
+  <div class="form-group">
     <h5>Title</h5>
     <input type="text" pInputText class="col-md-12" [(ngModel)]="paper.title" (change)="checkTitle(paper.title)"/>
   </div>

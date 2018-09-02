@@ -1,5 +1,7 @@
 package edu.nju.ise.repository.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import edu.nju.ise.repository.bean.LatexCommand;
 import edu.nju.ise.repository.bean.PaperCommand;
 import edu.nju.ise.repository.bean.ResponseData;
 import edu.nju.ise.repository.bean.ResponsePage;
@@ -25,7 +27,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/paper")
-@CrossOrigin(origins = { "http://localhost:4200", "null" })
+@CrossOrigin(origins = { "http://etp.kikbug.net:49080/", "null" })
 public class PaperController {
 
     @Autowired
@@ -51,6 +53,12 @@ public class PaperController {
         paper.setAuthors(authorList);
         Integer row = paperService.createPaper(paper);
         return row == 1 ? ResponseData.ok(null) : ResponseData.badRequest("提交论文失败！");
+    }
+
+    @PostMapping(name = "latexcreate")
+    public ResponseData latexCreate(@RequestBody LatexCommand latexCommand, HttpServletRequest request) {
+
+        return null;
     }
 
 
