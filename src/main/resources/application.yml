@@ -1,9 +1,22 @@
+server:
+  port: 8000
+  tomcat:
+    uri-encoding: UTF-8
+
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017
+      host: 127.0.0.1
       database: aitest_repository
+      username: aitest
+      password: aitest
+      port: 27017
+
   mvc:
     static-path-pattern: /**, /paper/**, /paper/edit/**
   resources:
-    static-locations: classpath:/static/web/
+    static-locations: classpath:/static/
+
+# logging config
+logging:
+  config: classpath:logback.xml
