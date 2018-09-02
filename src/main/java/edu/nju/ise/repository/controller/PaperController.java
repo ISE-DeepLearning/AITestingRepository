@@ -1,6 +1,5 @@
 package edu.nju.ise.repository.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import edu.nju.ise.repository.bean.LatexCommand;
 import edu.nju.ise.repository.bean.PaperCommand;
 import edu.nju.ise.repository.bean.ResponseData;
@@ -10,7 +9,6 @@ import edu.nju.ise.repository.model.Paper;
 import edu.nju.ise.repository.service.PaperService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
@@ -51,14 +49,20 @@ public class PaperController {
             authorList.add(author);
         }
         paper.setAuthors(authorList);
+        paper.setSearchTitle(paperCommand.getTitle().toLowerCase());
         Integer row = paperService.createPaper(paper);
         return row == 1 ? ResponseData.ok(null) : ResponseData.badRequest("提交论文失败！");
     }
 
-    @PostMapping(name = "latexcreate")
+    @PostMapping
+    @RequestMapping("latexcreate")
     public ResponseData latexCreate(@RequestBody LatexCommand latexCommand, HttpServletRequest request) {
-
-        return null;
+        if(latexCommand == null){
+            return ResponseData.badRequest("参数不能为空。");
+        }
+        Paper paper = latexCommand.parsePaper();
+        Integer row = paperService.createPaper(paper);
+        return row == 1 ? ResponseData.ok(null) : ResponseData.badRequest("提交论文失败！");
     }
 
 
@@ -94,10 +98,5 @@ public class PaperController {
         List<Paper> paperList = paperService.isExistTitle(title);
         return CollectionUtils.isEmpty(paperList) ? ResponseData.ok(0) : ResponseData.ok(paperList.size());
     }
-
-
-
-
-
 
 }

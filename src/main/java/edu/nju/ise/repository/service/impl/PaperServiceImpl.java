@@ -48,7 +48,8 @@ public class PaperServiceImpl implements PaperService {
             BeanUtils.copyProperties(result, responsePage);
             return responsePage;
         }else if(type.equals(Constants.SEARCH_TYPE_TITLE)){
-            Page<Paper> result =  paperDao.findByTitleLike(keywords, pageable);
+            //不区分大小写
+            Page<Paper> result =  paperDao.findBySearchTitleLike(keywords.toLowerCase(), pageable);
             BeanUtils.copyProperties(result, responsePage);
             return responsePage;
         }else if(type.equals(Constants.SEARCH_TYPE_AUTHOR)){

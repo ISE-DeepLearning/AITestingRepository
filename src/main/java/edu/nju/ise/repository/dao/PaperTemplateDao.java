@@ -34,7 +34,8 @@ public class PaperTemplateDao {
         ResponsePage<Paper> responsePage = new ResponsePage<>(pageable.getPageNumber()+1, pageable.getPageSize());
 
         Query query = new Query();
-        Criteria criteria = Criteria.where("authors").elemMatch(Criteria.where("name").regex(".*" +authors+ ".*"));
+        //不区分大小写
+        Criteria criteria = Criteria.where("authors").elemMatch(Criteria.where("name").regex(".*" +authors+ ".*", "i"));
         query.addCriteria(criteria);
 
         //计算总数
