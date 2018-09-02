@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Config } from "../config";
 import { PaperService } from "../service/paper.service";
-import { Paper } from "../model/paper";
+import { LatexPaperInfo, Paper } from "../model/paper";
 import { MessageService } from "primeng/api";
 
 @Component({
@@ -16,7 +16,7 @@ export class PaperEditComponent implements OnInit {
 
   authorName: string;
 
-  latexInfo: object;
+  latexInfo: LatexPaperInfo;
 
   constructor(
     private paperService: PaperService,
@@ -30,7 +30,11 @@ export class PaperEditComponent implements OnInit {
       publishJournal: '',
       url: ''
     });
-    this.latexInfo = {};
+    this.latexInfo = new LatexPaperInfo({
+      info: '',
+      url: '',
+      paperAbstract: ''
+    });
   }
 
   ngOnInit() {

@@ -42,3 +42,19 @@ export class Paper {
     return result;
   }
 }
+export interface LatexPaperInfoParameters {
+  info: string;
+  url: string;
+  paperAbstract: string;
+}
+export class LatexPaperInfo {
+  info: string;
+  url: string;
+  paperAbstract: string;
+
+  constructor(parameters?: LatexPaperInfoParameters) {
+    this.info = parameters.info;
+    this.url = parameters.url;
+    this.paperAbstract = parameters.paperAbstract;
+  }
+}
