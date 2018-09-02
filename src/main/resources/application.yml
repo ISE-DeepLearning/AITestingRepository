@@ -4,6 +4,6 @@ spring:
       uri: mongodb://localhost:27017
       database: aitest_repository
   mvc:
-    static-path-pattern: /**
+    static-path-pattern: /**, /paper/**, /paper/edit/**
   resources:
-    static-locations: classpath:/static/
+    static-locations: classpath:/static/web/
