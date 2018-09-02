@@ -61,6 +61,11 @@ public class PaperController {
             return ResponseData.badRequest("参数不能为空。");
         }
         Paper paper = latexCommand.parsePaper();
+        //判断论文是否存在
+        List<Paper> paperList = paperService.isExistTitle(paper.getSearchTitle());
+        if(!CollectionUtils.isEmpty(paperList)){
+            return ResponseData.badRequest("论文已存在");
+        }
         Integer row = paperService.createPaper(paper);
         return row == 1 ? ResponseData.ok(null) : ResponseData.badRequest("提交论文失败！");
     }

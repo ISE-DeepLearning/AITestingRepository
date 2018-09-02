@@ -31,5 +31,5 @@ public interface PaperDao extends MongoRepository<Paper, String> {
      * @param title
      * @return
      */
-    List<Paper> findByTitle(String title);
+    List<Paper> findBySearchTitle(String searchTitle);
 }
