@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from "@angular/router";
-import { DashboardComponent } from "./dashboard/dashboard.component";
 import { PaperComponent } from "./paper/paper.component";
 import { PaperEditComponent } from "./paper-edit/paper-edit.component";
+import { TechniqueComponent } from "./technique/technique.component";
+import { TechniqueEditComponent } from "./technique-edit/technique-edit.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: DashboardComponent },
+  { path: '', redirectTo: '/paper', pathMatch: 'full' },
+  // { path: 'home', component: DashboardComponent },
   { path: 'paper', component: PaperComponent },
-  { path: 'paper/edit', component: PaperEditComponent }
+  { path: 'paper/edit', component: PaperEditComponent },
+  { path: 'tech', component: TechniqueComponent },
+  { path: 'tech-edit', component: TechniqueEditComponent }
 ];
 
 @NgModule({

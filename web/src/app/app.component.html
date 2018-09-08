@@ -4,8 +4,9 @@
     <a class="navbar-brand" routerLink="/">AI Testing Repository</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/" [class.active]="selectedNav === 'home'" (click)="onSelectNav('home')">Home</a>
+        <!--<a class="nav-item nav-link" routerLink="/" [class.active]="selectedNav === 'home'" (click)="onSelectNav('home')">Home</a>-->
         <a class="nav-item nav-link" routerLink="/paper" [skipLocationChange]="'false'" [queryParams]="{ type: 1 }" [class.active]="selectedNav === 'paper'" (click)="onSelectNav('paper')">Paper</a>
+        <a class="nav-item nav-link" routerLink="/tech" [skipLocationChange]="'false'" [class.active]="selectedNav === 'tech'" (click)="onSelectNav('tech')">Technique</a>
       </div>
     </div>
   </div>

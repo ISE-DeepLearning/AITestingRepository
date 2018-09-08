@@ -120,6 +120,14 @@ export class PaperEditComponent implements OnInit {
     });
   }
 
+  resetLatex(): void {
+    this.latexInfo = new LatexPaperInfo({
+      info: '',
+      url: '',
+      paperAbstract: ''
+    });
+  }
+
   showError(msg: string) {
     this.messageService.add({ key: 'info', severity: 'error', summary: 'Error Message', detail: msg });
   }

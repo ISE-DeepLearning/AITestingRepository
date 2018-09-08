@@ -20,6 +20,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaperComponent } from './paper/paper.component';
 import { PaperEditComponent } from './paper-edit/paper-edit.component';
 import { HttpClientModule } from "@angular/common/http";
+import { TechniqueComponent } from './technique/technique.component';
+import { TechniqueEditComponent } from './technique-edit/technique-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { HttpClientModule } from "@angular/common/http";
     DashboardComponent,
     PaperComponent,
     PaperEditComponent,
+    TechniqueComponent,
+    TechniqueEditComponent,
   ],
   imports: [
     BrowserModule,

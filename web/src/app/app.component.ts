@@ -25,10 +25,10 @@ export class AppComponent {
       let path: string = location.path();
       this.selectedNav = path.substring(1, path.length);
       if (this.selectedNav == '') {
-        this.selectedNav = 'home';
+        this.selectedNav = 'paper';
       }
     } else {
-      this.selectedNav = 'home';
+      this.selectedNav = 'paper';
     }
     this.types = [
       { label: 'By paper title', value: Config.type_title },
