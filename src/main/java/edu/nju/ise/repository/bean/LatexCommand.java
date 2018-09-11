@@ -1,6 +1,5 @@
 package edu.nju.ise.repository.bean;
 
-import com.alibaba.fastjson.JSON;
 import edu.nju.ise.repository.model.Author;
 import edu.nju.ise.repository.model.Paper;
 import lombok.AllArgsConstructor;

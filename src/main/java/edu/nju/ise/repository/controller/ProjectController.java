@@ -1,20 +1,14 @@
 package edu.nju.ise.repository.controller;
 
-import edu.nju.ise.repository.bean.LatexCommand;
-import edu.nju.ise.repository.bean.PaperCommand;
 import edu.nju.ise.repository.bean.ResponseData;
 import edu.nju.ise.repository.bean.ResponsePage;
-import edu.nju.ise.repository.model.Author;
-import edu.nju.ise.repository.model.Paper;
-import edu.nju.ise.repository.service.PaperService;
+import edu.nju.ise.repository.model.Project;
 import edu.nju.ise.repository.service.ProjectService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 

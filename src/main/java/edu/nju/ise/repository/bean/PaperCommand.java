@@ -1,10 +1,8 @@
 package edu.nju.ise.repository.bean;
 
-import edu.nju.ise.repository.model.Author;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
