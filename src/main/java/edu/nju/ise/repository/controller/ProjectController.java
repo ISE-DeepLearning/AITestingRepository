@@ -6,6 +6,7 @@ import edu.nju.ise.repository.bean.ResponseData;
 import edu.nju.ise.repository.bean.ResponsePage;
 import edu.nju.ise.repository.model.Author;
 import edu.nju.ise.repository.model.Paper;
+import edu.nju.ise.repository.model.Project;
 import edu.nju.ise.repository.service.PaperService;
 import edu.nju.ise.repository.service.ProjectService;
 import org.springframework.beans.BeanUtils;

@@ -80,7 +80,6 @@ export class PaperEditComponent implements OnInit {
 
     this.paperService.uploadPaper(this.paper)
       .subscribe(res => {
-        console.log(res);
         if (res['code'] != 200) {
           this.showError(res['message']);
           return;
@@ -140,7 +139,7 @@ export class PaperEditComponent implements OnInit {
     this.messageService.add({ key: 'info', severity: 'info', summary: 'Info Message', detail: msg });
   }
 
-  checkTitle(title: string) {
+  checkTitle(title: string): void {
     console.log(title);
     if (Config.isValid(title)) {
       this.paperService.checkTitle(title)

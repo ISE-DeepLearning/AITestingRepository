@@ -1,3 +1,22 @@
-<p>
-  technique works!
-</p>
+<div class="row">
+  <h4>Technique List</h4>
+  <div class="paper-list col-md-12">
+    <div class="paper" *ngFor="let project of projects">
+      <p><strong>{{ project.title }}</strong></p>
+      <p>{{ project.introduction }}</p>
+      <div class="text-right">
+        <a href="{{ project.url }}" target="_blank">URL</a>
+      </div>
+    </div>
+  </div>
+  <div class="pagination" *ngIf="totalElements == 0">
+    <span>No results</span>
+  </div>
+  <div class="pagination">
+    <p-paginator *ngIf="totalElements != 0"
+                 [rows]="pageSize"
+                 [totalRecords]="totalElements"
+                 (onPageChange)="paginate($event)"></p-paginator>
+  </div>
+</div>
+<p-toast key="info"></p-toast>

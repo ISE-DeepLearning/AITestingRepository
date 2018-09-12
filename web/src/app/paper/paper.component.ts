@@ -44,6 +44,10 @@ export class PaperComponent implements OnInit {
     this.sub = this.route.queryParams.subscribe(queryParams => {
       this.type = Config.isValid(queryParams['type']) ? parseInt(queryParams['type']) : Config.type_title;
       this.keywords = queryParams['keywords'];
+      this.currentPage = 1;
+      this.pageSize = 10;
+      this.totalPages = 0;
+      this.totalElements = 0;
       this.searchPaper();
     });
   }

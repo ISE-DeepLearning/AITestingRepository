@@ -1,3 +1,23 @@
-<p>
-  technique-edit works!
-</p>
+<div class="row">
+  <h4>Project Upload</h4>
+</div>
+<div class="row">
+  <div class="form-group">
+    <h5>Title</h5>
+    <input type="text" pInputText class="col-md-12" [(ngModel)]="project.title" (change)="checkTitle(project.title)"/>
+  </div>
+  <div class="form-group">
+    <h5>URL</h5>
+    <input type="text" pInputText class="col-md-12" [(ngModel)]="project.url"/>
+  </div>
+  <div class="form-group">
+    <h5>Introduction</h5>
+    <textarea pInputTextarea [(ngModel)]="project.introduction" class="col-md-12" [rows]="5"></textarea>
+  </div>
+  <div class="form-group">
+    <button pButton type="button" icon="pi pi-file" label="Save" class="ui-button-success" (click)="uploadProject()"></button>
+    &nbsp;&nbsp;
+    <button pButton type="button" icon="pi pi-refresh" label="Reset" class="ui-button-secondary" (click)="reset()"></button>
+  </div>
+</div>
+<p-toast key="info"></p-toast>

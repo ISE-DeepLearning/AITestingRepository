@@ -3,6 +3,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 import { PaperQueryParameters } from "./model/paper";
 import { ActivatedRoute } from "@angular/router";
 import { Config } from "./config";
+import { ProjectQueryParameters } from "./model/project";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
   selectedNav: string;
   types: any[];
 
-  queryParams: PaperQueryParameters;
+  paperQueryParams: PaperQueryParameters;
+  projectQueryParams: ProjectQueryParameters;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,9 +36,10 @@ export class AppComponent {
       { label: 'By paper title', value: Config.type_title },
       { label: 'By author name', value: Config.type_author }
     ];
-    this.queryParams = {
+    this.paperQueryParams = {
       type: Config.type_title,
     };
+    this.projectQueryParams = {};
   }
 
   onSelectNav(nav: string): void {

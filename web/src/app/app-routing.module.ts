@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'paper', component: PaperComponent },
   { path: 'paper/edit', component: PaperEditComponent },
   { path: 'tech', component: TechniqueComponent },
-  { path: 'tech-edit', component: TechniqueEditComponent }
+  { path: 'tech/edit', component: TechniqueEditComponent }
 ];
 
 @NgModule({
