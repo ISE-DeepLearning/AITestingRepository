@@ -29,7 +29,7 @@ public interface PaperDao extends MongoRepository<Paper, String> {
 
     /**
      * 搜索论文标题是否已存在
-     * @param title
+     * @param searchTitle
      * @return
      */
     List<Paper> findBySearchTitle(String searchTitle);

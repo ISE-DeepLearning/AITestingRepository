@@ -1,12 +1,12 @@
 package edu.nju.ise.repository.controller;
 
+import com.alibaba.fastjson.JSON;
 import edu.nju.ise.repository.bean.LatexCommand;
 import edu.nju.ise.repository.bean.PaperCommand;
 import edu.nju.ise.repository.bean.ResponseData;
 import edu.nju.ise.repository.bean.ResponsePage;
 import edu.nju.ise.repository.model.Author;
 import edu.nju.ise.repository.model.Paper;
-import edu.nju.ise.repository.model.Tag;
 import edu.nju.ise.repository.service.PaperService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,10 +58,12 @@ public class PaperController {
     @PostMapping
     @RequestMapping("latexcreate")
     public ResponseData latexCreate(@RequestBody LatexCommand latexCommand, HttpServletRequest request) {
+        System.out.println(JSON.toJSONString(latexCommand));
         if(latexCommand == null){
             return ResponseData.badRequest("参数不能为空。");
         }
         Paper paper = latexCommand.parsePaper();
+        System.out.println(JSON.toJSONString(paper));
         //判断论文是否存在
         List<Paper> paperList = paperService.isExistTitle(paper.getSearchTitle());
         if(!CollectionUtils.isEmpty(paperList)){

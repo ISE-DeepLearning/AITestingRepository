@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -65,6 +64,7 @@ public class LatexCommand {
         paper.setSearchTitle(title.toLowerCase());
         paper.setPaperAbstract(paperAbstract);
         paper.setUrl(url);
+        paper.setTags(tags);
         return paper;
     }
 
