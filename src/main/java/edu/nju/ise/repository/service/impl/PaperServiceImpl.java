@@ -40,7 +40,7 @@ public class PaperServiceImpl implements PaperService {
      * 分页查询所有论文，按时间倒序排列
      */
     @Override
-    public ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, String tagId, Integer currentPage, Integer pageSize) {
+    public ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize) {
         PageRequest pageable = buildPageRequest(currentPage, pageSize, null);
         ResponsePage<Paper> responsePage = new ResponsePage<>(currentPage, pageSize);
         if(keywords == null || "".equals(keywords)){
@@ -65,6 +65,22 @@ public class PaperServiceImpl implements PaperService {
     public List<Paper> isExistTitle(String title) {
         title = title.trim();
         return paperDao.findBySearchTitle(title);
+    }
+
+    /**
+     * 按标签搜索论文
+     * @param tagId
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public ResponsePage<Paper> findByTag(String tagId, Integer currentPage, Integer pageSize) {
+        PageRequest pageable = buildPageRequest(currentPage, pageSize, null);
+        ResponsePage<Paper> responsePage = new ResponsePage<>(currentPage, pageSize);
+        Page<Paper> result = paperDao.findByTagsIn(tagId, pageable);
+        BeanUtils.copyProperties(result, responsePage);
+        return responsePage;
     }
 
 

@@ -25,12 +25,11 @@ public interface PaperService {
      * 分页查询所有论文，按时间倒序排列
      * @param type 查询类型 1-paper,2-author
      * @param keywords 关键字
-     * @param tagId
      * @param currentPage 当前页数 从1开始计数
      * @param pageSize 每页数量
      * @return
      */
-    ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, String tagId, Integer currentPage, Integer pageSize);
+    ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize);
 
     /**
      * 搜索论文标题是否已存在
@@ -38,4 +37,13 @@ public interface PaperService {
      * @return
      */
     List<Paper> isExistTitle(String title);
+
+    /**
+     * 按标签搜索论文
+     * @param tagId
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    ResponsePage<Paper> findByTag(String tagId, Integer currentPage, Integer pageSize);
 }
