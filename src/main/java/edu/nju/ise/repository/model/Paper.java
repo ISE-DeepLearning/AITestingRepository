@@ -50,7 +50,7 @@ public class Paper {
     @Field("paper_abstract")
     private String paperAbstract;
 
-    //标签(暂不启用）
-//    private List<Label> labels;
+    //标签
+    private List<String> tags;
 
 }

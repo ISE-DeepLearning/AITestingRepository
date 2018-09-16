@@ -38,6 +38,9 @@ public class LatexCommand {
     //链接
     private String url;
 
+    //标签
+    private List<String> tags;
+
 
     public Paper parsePaper(){
         Paper paper = new Paper();

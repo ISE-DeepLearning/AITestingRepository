@@ -16,7 +16,6 @@ public interface ProjectService {
 
     /**
      * 提交一篇项目
-     * @param paper
      * @param project
      * @return
      */

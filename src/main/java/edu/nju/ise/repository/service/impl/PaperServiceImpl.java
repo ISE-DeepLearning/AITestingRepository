@@ -40,7 +40,7 @@ public class PaperServiceImpl implements PaperService {
      * 分页查询所有论文，按时间倒序排列
      */
     @Override
-    public ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize) {
+    public ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, String tagId, Integer currentPage, Integer pageSize) {
         PageRequest pageable = buildPageRequest(currentPage, pageSize, null);
         ResponsePage<Paper> responsePage = new ResponsePage<>(currentPage, pageSize);
         if(keywords == null || "".equals(keywords)){

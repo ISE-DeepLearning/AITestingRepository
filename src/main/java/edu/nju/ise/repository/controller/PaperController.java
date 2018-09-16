@@ -81,13 +81,13 @@ public class PaperController {
      */
     @GetMapping
     @RequestMapping("findByKeyword")
-    public ResponseData findByKeyword(@RequestParam Integer type, @RequestParam(required = false) String keywords,
+    public ResponseData findByKeyword(@RequestParam Integer type, @RequestParam(required = false) String keywords, @RequestParam(required = false) String tagId,
                                       @RequestParam Integer currentPage, @RequestParam Integer pageSize){
         //参数判断
         currentPage = currentPage < 1 ? 1 : currentPage;
         pageSize = pageSize < 1 ? 10 : pageSize;
         //查询结果
-        ResponsePage<Paper> paperList = paperService.findPageByKeyword(type, keywords, currentPage, pageSize);
+        ResponsePage<Paper> paperList = paperService.findPageByKeyword(type, keywords, tagId, currentPage, pageSize);
         return ResponseData.ok(paperList);
     }
 
