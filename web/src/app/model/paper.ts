@@ -1,6 +1,9 @@
+import { Tag } from "./tag";
+
 export interface PaperQueryParameters {
   type?: number;
   keywords?: string;
+  tag?: number
 }
 export interface PaperParameters {
   authors: any[];
@@ -9,6 +12,7 @@ export interface PaperParameters {
   paperAbstract: string;
   url: string;
   publishTime?: string;
+  tags?: Tag[];
 }
 export class Paper {
   authors: any[] = [];
@@ -17,6 +21,7 @@ export class Paper {
   paperAbstract: string = '';
   url: string = '';
   publishTime?: string = '';
+  tags?: Tag[];
 
   showAbstract: boolean;
 
@@ -28,6 +33,7 @@ export class Paper {
     this.url = parameters.url;
     this.showAbstract = false;
     this.publishTime = parameters.publishTime;
+    this.tags = parameters.tags;
   }
 
   getAuthorsStr(): string {
@@ -46,15 +52,18 @@ export interface LatexPaperInfoParameters {
   info: string;
   url: string;
   paperAbstract: string;
+  tags?: Tag[];
 }
 export class LatexPaperInfo {
   info: string;
   url: string;
   paperAbstract: string;
+  tags?: Tag[];
 
   constructor(parameters?: LatexPaperInfoParameters) {
     this.info = parameters.info;
     this.url = parameters.url;
     this.paperAbstract = parameters.paperAbstract;
+    this.tags = parameters.tags;
   }
 }

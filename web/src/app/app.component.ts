@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { PaperQueryParameters } from "./model/paper";
 import { ActivatedRoute } from "@angular/router";
 import { Config } from "./config";
 import { ProjectQueryParameters } from "./model/project";
+import { Tag } from "./model/tag";
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent {
 
   selectedNav: string;
   types: any[];
+  // tags: Tag[];
 
   paperQueryParams: PaperQueryParameters;
   projectQueryParams: ProjectQueryParameters;
@@ -42,8 +44,19 @@ export class AppComponent {
     this.projectQueryParams = {};
   }
 
+
+
   onSelectNav(nav: string): void {
     this.selectedNav = nav;
   }
+
+  // ngOnInit(): void {
+  //   this.tags = [
+  //     {
+  //       id: 1,
+  //       name: 'test'
+  //     }
+  //   ];
+  // }
 
 }

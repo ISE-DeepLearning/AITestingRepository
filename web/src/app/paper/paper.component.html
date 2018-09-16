@@ -1,10 +1,14 @@
 <div class="row">
   <h4>Paper List</h4>
+  <div class="span-list">
+    <span class="badge badge-primary" *ngIf="searchTag">{{ searchTag.name }}&nbsp;<span class="delete-btn" (click)="deleteTag()">&times;</span></span>
+  </div>
   <div class="paper-list col-md-12">
     <div class="paper" *ngFor="let paper of papers">
       <p>{{ paper.getAuthorsStr() }}</p>
       <p><strong>{{ paper.title }}</strong></p>
       <p>{{ paper.publishJournal }}</p>
+      <p><span class="badge badge-primary" *ngFor="let tag of paper.tags" (click)="chooseTag(tag)">{{ tag.name }}</span></p>
       <div class="text-right">
         <a (click)="toggleAbstract(paper)">Abstract</a>
         <a href="{{ paper.url }}" target="_blank">URL</a>
