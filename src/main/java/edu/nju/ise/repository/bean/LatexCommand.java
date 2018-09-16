@@ -2,12 +2,14 @@ package edu.nju.ise.repository.bean;
 
 import edu.nju.ise.repository.model.Author;
 import edu.nju.ise.repository.model.Paper;
+import edu.nju.ise.repository.model.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -39,7 +41,7 @@ public class LatexCommand {
     private String url;
 
     //标签
-    private List<String> tags;
+    private List<Tag> tags;
 
 
     public Paper parsePaper(){
@@ -56,6 +58,11 @@ public class LatexCommand {
             Author author = new Author(name.trim());
             authorList.add(author);
         }
+        List<String> tagList = new ArrayList<>();
+        for(Tag tag : tags){
+            tagList.add(tag.getId());
+        }
+        paper.setTags(tagList);
 
         paper.setAuthors(authorList);
         paper.setPublishTime(year);

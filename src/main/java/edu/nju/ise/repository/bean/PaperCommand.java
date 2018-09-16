@@ -1,5 +1,6 @@
 package edu.nju.ise.repository.bean;
 
+import edu.nju.ise.repository.model.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,5 +38,5 @@ public class PaperCommand {
     private String paperAbstract;
 
     //标签
-    private List<String> tags;
+    private List<Tag> tags;
 }
