@@ -24,11 +24,11 @@ import java.util.List;
 public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
-    private ProjectDao ProjectDao;
+    private ProjectDao projectDao;
 
     @Override
     public Integer createProject(Project Project) {
-        Project result =  ProjectDao.insert(Project);
+        Project result =  projectDao.insert(Project);
         return result != null ? 1 : 0;
     }
 
@@ -41,12 +41,12 @@ public class ProjectServiceImpl implements ProjectService {
         PageRequest pageable = PageRequest.of(currentPage - 1, pageSize, sort);
         ResponsePage<Project> responsePage = new ResponsePage<>(currentPage, pageSize);
         if(keywords == null || "".equals(keywords)){
-            Page<Project> result = ProjectDao.findAll(pageable);
+            Page<Project> result = projectDao.findAll(pageable);
             BeanUtils.copyProperties(result, responsePage);
             return responsePage;
         }else{
             //不区分大小写
-            Page<Project> result =  ProjectDao.findBySearchTitleLike(keywords.toLowerCase(), pageable);
+            Page<Project> result =  projectDao.findBySearchTitleLike(keywords.toLowerCase(), pageable);
             BeanUtils.copyProperties(result, responsePage);
             return responsePage;
         }
@@ -58,7 +58,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<Project> isExistTitle(String title) {
         title = title.trim();
-        return ProjectDao.findBySearchTitle(title);
+        return projectDao.findBySearchTitle(title);
     }
 
 }

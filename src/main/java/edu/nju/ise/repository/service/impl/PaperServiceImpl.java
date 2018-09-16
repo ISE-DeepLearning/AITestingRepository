@@ -67,6 +67,22 @@ public class PaperServiceImpl implements PaperService {
         return paperDao.findBySearchTitle(title);
     }
 
+    /**
+     * 按标签搜索论文
+     * @param tagId
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    @Override
+    public ResponsePage<Paper> findByTag(String tagId, Integer currentPage, Integer pageSize) {
+        PageRequest pageable = buildPageRequest(currentPage, pageSize, null);
+        ResponsePage<Paper> responsePage = new ResponsePage<>(currentPage, pageSize);
+        Page<Paper> result = paperDao.findByTagsIn(tagId, pageable);
+        BeanUtils.copyProperties(result, responsePage);
+        return responsePage;
+    }
+
 
     /**
      *  创建分页请求.

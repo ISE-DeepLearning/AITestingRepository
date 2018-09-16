@@ -16,10 +16,10 @@ public interface ProjectService {
 
     /**
      * 提交一篇项目
-     * @param paper
+     * @param project
      * @return
      */
-    Integer createProject(Project paper);
+    Integer createProject(Project project);
 
     /**
      * 分页查询所有项目，按时间倒序排列

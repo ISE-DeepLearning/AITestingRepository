@@ -6,6 +6,7 @@ import edu.nju.ise.repository.bean.ResponseData;
 import edu.nju.ise.repository.bean.ResponsePage;
 import edu.nju.ise.repository.model.Author;
 import edu.nju.ise.repository.model.Paper;
+import edu.nju.ise.repository.model.Tag;
 import edu.nju.ise.repository.service.PaperService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -48,6 +50,11 @@ public class PaperController {
             Author author = new Author(name);
             authorList.add(author);
         }
+        List<String> tagList = new ArrayList<>();
+        for(Tag tag : paperCommand.getTags()){
+            tagList.add(tag.getId());
+        }
+        paper.setTags(tagList);
         paper.setAuthors(authorList);
         paper.setSearchTitle(paperCommand.getTitle().toLowerCase());
         Integer row = paperService.createPaper(paper);
@@ -88,6 +95,23 @@ public class PaperController {
         pageSize = pageSize < 1 ? 10 : pageSize;
         //查询结果
         ResponsePage<Paper> paperList = paperService.findPageByKeyword(type, keywords, currentPage, pageSize);
+        return ResponseData.ok(paperList);
+    }
+
+    /**
+     * 按标签分页查询页数
+     * @param currentPage 当前页数 从1开始计数
+     * @param pageSize 每页数量
+     * @return
+     */
+    @GetMapping
+    @RequestMapping("findByTag")
+    public ResponseData findByTag(@RequestParam String tagId, @RequestParam Integer currentPage, @RequestParam Integer pageSize){
+        //参数判断
+        currentPage = currentPage < 1 ? 1 : currentPage;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+        //查询结果
+        ResponsePage<Paper> paperList = paperService.findByTag(tagId, currentPage, pageSize);
         return ResponseData.ok(paperList);
     }
 

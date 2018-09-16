@@ -37,4 +37,13 @@ public interface PaperService {
      * @return
      */
     List<Paper> isExistTitle(String title);
+
+    /**
+     * 按标签搜索论文
+     * @param tagId
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
+    ResponsePage<Paper> findByTag(String tagId, Integer currentPage, Integer pageSize);
 }
