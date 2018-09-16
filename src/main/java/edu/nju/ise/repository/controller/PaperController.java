@@ -14,7 +14,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -50,11 +49,6 @@ public class PaperController {
             Author author = new Author(name);
             authorList.add(author);
         }
-        List<String> tagList = new ArrayList<>();
-        for(Tag tag : paperCommand.getTags()){
-            tagList.add(tag.getId());
-        }
-        paper.setTags(tagList);
         paper.setAuthors(authorList);
         paper.setSearchTitle(paperCommand.getTitle().toLowerCase());
         Integer row = paperService.createPaper(paper);

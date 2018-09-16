@@ -58,12 +58,6 @@ public class LatexCommand {
             Author author = new Author(name.trim());
             authorList.add(author);
         }
-        List<String> tagList = new ArrayList<>();
-        for(Tag tag : tags){
-            tagList.add(tag.getId());
-        }
-        paper.setTags(tagList);
-
         paper.setAuthors(authorList);
         paper.setPublishTime(year);
         paper.setPublishJournal(StringUtils.isEmpty(journal) ? bookTitle : journal);

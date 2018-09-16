@@ -8,8 +8,8 @@ spring:
     mongodb:
       host: 127.0.0.1
       database: aitest_repository
-      username: aitest
-      password: aitest
+#      username: aitest
+#      password: aitest
       port: 27017
 
   mvc:

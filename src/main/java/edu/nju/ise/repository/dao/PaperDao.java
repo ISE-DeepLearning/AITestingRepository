@@ -40,5 +40,5 @@ public interface PaperDao extends MongoRepository<Paper, String> {
      * @param pageable
      * @return
      */
-    Page<Paper> findByTagsIn(String tagId, Pageable pageable);
+    Page<Paper> findByTagsIdIn(String tagId, Pageable pageable);
 }
