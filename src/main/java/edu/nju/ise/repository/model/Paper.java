@@ -51,6 +51,6 @@ public class Paper {
     private String paperAbstract;
 
     //标签
-    private List<String> tags;
+    private List<Tag> tags;
 
 }

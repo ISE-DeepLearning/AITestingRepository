@@ -1,12 +1,12 @@
 package edu.nju.ise.repository.controller;
 
+import com.alibaba.fastjson.JSON;
 import edu.nju.ise.repository.bean.LatexCommand;
 import edu.nju.ise.repository.bean.PaperCommand;
 import edu.nju.ise.repository.bean.ResponseData;
 import edu.nju.ise.repository.bean.ResponsePage;
 import edu.nju.ise.repository.model.Author;
 import edu.nju.ise.repository.model.Paper;
-import edu.nju.ise.repository.model.Tag;
 import edu.nju.ise.repository.service.PaperService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -50,11 +49,6 @@ public class PaperController {
             Author author = new Author(name);
             authorList.add(author);
         }
-        List<String> tagList = new ArrayList<>();
-        for(Tag tag : paperCommand.getTags()){
-            tagList.add(tag.getId());
-        }
-        paper.setTags(tagList);
         paper.setAuthors(authorList);
         paper.setSearchTitle(paperCommand.getTitle().toLowerCase());
         Integer row = paperService.createPaper(paper);
@@ -64,10 +58,12 @@ public class PaperController {
     @PostMapping
     @RequestMapping("latexcreate")
     public ResponseData latexCreate(@RequestBody LatexCommand latexCommand, HttpServletRequest request) {
+        System.out.println(JSON.toJSONString(latexCommand));
         if(latexCommand == null){
             return ResponseData.badRequest("参数不能为空。");
         }
         Paper paper = latexCommand.parsePaper();
+        System.out.println(JSON.toJSONString(paper));
         //判断论文是否存在
         List<Paper> paperList = paperService.isExistTitle(paper.getSearchTitle());
         if(!CollectionUtils.isEmpty(paperList)){

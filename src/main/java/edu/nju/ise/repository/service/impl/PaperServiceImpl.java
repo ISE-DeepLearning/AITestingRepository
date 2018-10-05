@@ -78,7 +78,7 @@ public class PaperServiceImpl implements PaperService {
     public ResponsePage<Paper> findByTag(String tagId, Integer currentPage, Integer pageSize) {
         PageRequest pageable = buildPageRequest(currentPage, pageSize, null);
         ResponsePage<Paper> responsePage = new ResponsePage<>(currentPage, pageSize);
-        Page<Paper> result = paperDao.findByTagsIn(tagId, pageable);
+        Page<Paper> result = paperDao.findByTagsIdIn(tagId, pageable);
         BeanUtils.copyProperties(result, responsePage);
         return responsePage;
     }
