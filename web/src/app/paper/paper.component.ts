@@ -92,6 +92,10 @@ export class PaperComponent implements OnInit {
 
   chooseTag(tag: Tag): void {
     this.searchTag = tag;
+    this.currentPage = 1;
+    this.pageSize = 10;
+    this.totalPages = 0;
+    this.totalElements = 0;
     this.searchPaper();
   }
 

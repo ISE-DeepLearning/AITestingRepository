@@ -32,7 +32,7 @@ export class PaperService {
   }
 
   getPapersByTag(tag: Tag, currentPage: number, pageSize: number): Observable<object> {
-    const url: string = `${Config.base_url}/`;
+    const url: string = `${Config.base_url}/api/paper/findByTag?tagId=${tag.id}&currentPage=${currentPage}&pageSize=${pageSize}`;
     return this.http.get(url, {
       responseType: 'json',
       withCredentials: true

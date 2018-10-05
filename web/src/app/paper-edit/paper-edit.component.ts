@@ -50,7 +50,7 @@ export class PaperEditComponent implements OnInit {
           this.showError(res['message']);
           return;
         }
-        console.log(res['data']);
+        // console.log(res['data']);
         this.tags = res['data'];
         this.latexTag = this.tags[0];
         this.tag = this.tags[0];
@@ -134,9 +134,10 @@ export class PaperEditComponent implements OnInit {
     if (!Config.isValid(this.latexInfo.url)) {
       this.showError("URL cannot be empty!");
     }
+    console.log(this.latexInfo);
     this.paperService.uploadLatexInfo(this.latexInfo)
       .subscribe(res => {
-        console.log(res);
+        // console.log(res);
         if (res['code'] != 200) {
           this.showError(res['message']);
           return;
