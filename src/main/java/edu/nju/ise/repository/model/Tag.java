@@ -22,6 +22,9 @@ public class Tag {
     @Id
     private String id;
 
+    //研究方向类型
+    private Integer type;
+
     //名字
     private String name;
 }

@@ -19,8 +19,14 @@ public interface TagDao extends MongoRepository<Tag, String> {
     /**
      * 搜索标签是否已存在
      * @param name 名称
+     * @param type 研究方向类型
      * @return
      */
-    List<Tag> findByName(String name);
+    List<Tag> findByTypeAndName(Integer type, String name);
 
+    /**
+     * @param type 研究方向类型
+     * @return
+     */
+    List<Tag> findByType(Integer type);
 }

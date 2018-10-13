@@ -15,21 +15,32 @@ public interface TagService {
 
     /**
      * 创建标签
+     *
+     * @param type
      * @param name
      * @return
      */
-    Integer createTag(String name);
+    Integer createTag(Integer type, String name);
 
     /**
      * 搜索标签是否已存在
+     *
+     * @param type
      * @param name 标签名
      * @return
      */
-    List<Tag> isExistTag(String name);
+    List<Tag> isExistTag(Integer type, String name);
 
     /**
      * 查询所有标签
      * @return
      */
     List<Tag> findAll();
+
+    /**
+     * 按类型查询
+     * @param type
+     * @return
+     */
+    List<Tag> findByType(Integer type);
 }

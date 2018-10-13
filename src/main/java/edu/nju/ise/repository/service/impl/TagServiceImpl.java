@@ -23,25 +23,30 @@ public class TagServiceImpl implements TagService {
 
     /**
      * 创建标签
+     *
+     * @param type
      * @param name
      * @return
      */
     @Override
-    public Integer createTag(String name) {
+    public Integer createTag(Integer type, String name) {
         Tag tag = new Tag();
         tag.setName(name);
+        tag.setType(type);
         return tagDao.insert(tag) != null ? 1 : 0;
     }
 
     /**
      * 搜索标签是否已存在
+     *
+     * @param type
      * @param name 标签名
      * @return
      */
     @Override
-    public List<Tag> isExistTag(String name) {
+    public List<Tag> isExistTag(Integer type, String name) {
         name = name.trim();
-        return tagDao.findByName(name);
+        return tagDao.findByTypeAndName(type, name);
     }
 
     /**
@@ -52,4 +57,16 @@ public class TagServiceImpl implements TagService {
     public List<Tag> findAll() {
         return tagDao.findAll();
     }
+
+    /**
+     * 按类型查询
+     * @param type
+     * @return
+     */
+    @Override
+    public List<Tag> findByType(Integer type) {
+        return tagDao.findByType(type);
+    }
+
+
 }
