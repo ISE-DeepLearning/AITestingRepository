@@ -36,17 +36,17 @@ public class ProjectServiceImpl implements ProjectService {
      * 分页查询所有项目，按时间倒序排列
      */
     @Override
-    public ResponsePage<Project> findPageByKeyword(String keywords, Integer currentPage, Integer pageSize) {
+    public ResponsePage<Project> findPageByTypeAndKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize) {
         Sort sort = new Sort(Sort.Direction.ASC, "title");
         PageRequest pageable = PageRequest.of(currentPage - 1, pageSize, sort);
         ResponsePage<Project> responsePage = new ResponsePage<>(currentPage, pageSize);
         if(keywords == null || "".equals(keywords)){
-            Page<Project> result = projectDao.findAll(pageable);
+            Page<Project> result = projectDao.findByType(type, pageable);
             BeanUtils.copyProperties(result, responsePage);
             return responsePage;
         }else{
             //不区分大小写
-            Page<Project> result =  projectDao.findBySearchTitleLike(keywords.toLowerCase(), pageable);
+            Page<Project> result =  projectDao.findByTypeAndSearchTitleLike(type, keywords.toLowerCase(), pageable);
             BeanUtils.copyProperties(result, responsePage);
             return responsePage;
         }
@@ -56,9 +56,9 @@ public class ProjectServiceImpl implements ProjectService {
      * 搜索项目标题是否已存在
      */
     @Override
-    public List<Project> isExistTitle(String title) {
+    public List<Project> isExistTitle(Integer type, String title) {
         title = title.trim();
-        return projectDao.findBySearchTitle(title);
+        return projectDao.findByTypeAndSearchTitle(type, title);
     }
 
 }

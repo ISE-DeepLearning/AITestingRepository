@@ -24,6 +24,9 @@ public class Project {
     @Id
     private String id;
 
+    //研究方向类型
+    private Integer type;
+
     //标题
     private String title;
 

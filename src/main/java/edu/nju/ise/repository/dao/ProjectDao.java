@@ -2,6 +2,7 @@ package edu.nju.ise.repository.dao;
 
 import edu.nju.ise.repository.model.Project;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -20,16 +21,26 @@ public interface ProjectDao extends MongoRepository<Project, String> {
 
     /**
      * 根据标题模糊匹配
+     * @param type 研究方向
      * @param searchTitle 标题关键字
      * @param pageable 分页
      * @return
      */
-    Page<Project> findBySearchTitleLike(String searchTitle, Pageable pageable);
+    Page<Project> findByTypeAndSearchTitleLike(Integer type, String searchTitle, Pageable pageable);
 
     /**
      * 搜索项目标题是否已存在
      * @param searchTitle
      * @return
      */
-    List<Project> findBySearchTitle(String searchTitle);
+    List<Project> findByTypeAndSearchTitle(Integer type, String searchTitle);
+
+    /**
+     * 根据类型查找所有项目
+     * @param type 研究方向
+     * @param pageable
+     * @return
+     */
+    Page<Project> findByType(Integer type, Pageable pageable);
+
 }

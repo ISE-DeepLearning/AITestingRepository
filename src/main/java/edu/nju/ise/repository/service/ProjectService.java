@@ -23,17 +23,20 @@ public interface ProjectService {
 
     /**
      * 分页查询所有项目，按时间倒序排列
+     * @param type 研究方向类型
      * @param keywords 关键字
      * @param currentPage 当前页数 从1开始计数
      * @param pageSize 每页数量
      * @return
      */
-    ResponsePage<Project> findPageByKeyword(String keywords, Integer currentPage, Integer pageSize);
+    ResponsePage<Project> findPageByTypeAndKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize);
 
     /**
      * 搜索项目标题是否已存在
+     *
+     * @param type 研究方向类型
      * @param title 标题
      * @return
      */
-    List<Project> isExistTitle(String title);
+    List<Project> isExistTitle(Integer type, String title);
 }

@@ -40,7 +40,7 @@ public class ProjectController {
         project.setSearchTitle(project.getTitle().toLowerCase());
 
         //判断项目是否存在
-        List<Project> projectList = projectService.isExistTitle(project.getSearchTitle());
+        List<Project> projectList = projectService.isExistTitle(project.getType(), project.getSearchTitle());
         if(!CollectionUtils.isEmpty(projectList)){
             return ResponseData.badRequest("项目已存在");
         }
@@ -60,13 +60,14 @@ public class ProjectController {
     @RequestMapping("findByKeyword")
     public ResponseData findByKeyword(
             @RequestParam(required = false) String keywords,
+            @RequestParam Integer type,
             @RequestParam Integer currentPage,
             @RequestParam Integer pageSize){
         //参数判断
         currentPage = currentPage < 1 ? 1 : currentPage;
         pageSize = pageSize < 1 ? 10 : pageSize;
         //查询结果
-        ResponsePage<Project> projectList = projectService.findPageByKeyword(keywords, currentPage, pageSize);
+        ResponsePage<Project> projectList = projectService.findPageByTypeAndKeyword(type, keywords, currentPage, pageSize);
         return ResponseData.ok(projectList);
     }
 
@@ -78,8 +79,8 @@ public class ProjectController {
      */
     @GetMapping
     @RequestMapping("isExistTitle")
-    public ResponseData isExistTitle(@RequestParam String title){
-        List<Project> projectList = projectService.isExistTitle(title);
+    public ResponseData isExistTitle(@RequestParam Integer type, @RequestParam String title){
+        List<Project> projectList = projectService.isExistTitle(type, title);
         return CollectionUtils.isEmpty(projectList) ? ResponseData.ok(0) : ResponseData.ok(projectList.size());
     }
 
