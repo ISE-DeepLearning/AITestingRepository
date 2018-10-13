@@ -5,6 +5,7 @@ import { Config } from "../config";
 import { PaperService } from "../service/paper.service";
 import { MessageService } from "primeng/api";
 import { Subscription } from "rxjs";
+import { Tag } from "../model/tag";
 
 @Component({
   selector: 'app-paper',
@@ -23,6 +24,8 @@ export class PaperComponent implements OnInit {
   type: number;
   keywords: string;
 
+  searchTag: Tag;
+
   private sub : Subscription;
 
   constructor(
@@ -30,14 +33,12 @@ export class PaperComponent implements OnInit {
     private paperService: PaperService,
     private messageService: MessageService
   ) {
-    // const params = route.snapshot.queryParamMap;
-    // this.type = Config.isValid(params.get('type')) ? parseInt(params.get('type')) : Config.type_title;
-    // this.keywords = params.get('keywords');
     this.papers = [];
     this.currentPage = 1;
     this.pageSize = 10;
     this.totalPages = 0;
     this.totalElements = 0;
+    this.searchTag = null;
   }
 
   ngOnInit() {
@@ -48,28 +49,65 @@ export class PaperComponent implements OnInit {
       this.pageSize = 10;
       this.totalPages = 0;
       this.totalElements = 0;
+      this.searchTag = null;
       this.searchPaper();
     });
   }
 
   searchPaper(): void {
-    this.paperService.getPapers(this.type, this.keywords, this.currentPage, this.pageSize)
-      .subscribe(res => {
-        if (res['code'] != 200) {
-          this.showError(res['message']);
-          return;
-        }
-        const data: object = res['data'];
-        const content: any[] = data['content'];
-        this.papers = [];
-        for (let i = 0; i < content.length; i++) {
-          this.papers.push(new Paper(content[i]));
-        }
-        // this.currentPage = data['currentPage'];
-        // this.pageSize = data['pageSize'];
-        this.totalPages = data['totalPages'];
-        this.totalElements = data['totalElements'];
-      });
+    if (this.searchTag != null) {
+      this.paperService.getPapersByTag(this.searchTag, this.currentPage, this.pageSize)
+        .subscribe(res => {
+          if (res['code'] != 200) {
+            this.showError(res['message']);
+            return;
+          }
+          const data: object = res['data'];
+          const content: any[] = data['content'];
+          this.papers = [];
+          for (let i = 0; i < content.length; i++) {
+            this.papers.push(new Paper(content[i]));
+          }
+          this.totalPages = data['totalPages'];
+          this.totalElements = data['totalElements'];
+        });
+    } else {
+      this.paperService.getPapers(this.type, this.keywords, this.currentPage, this.pageSize)
+        .subscribe(res => {
+          if (res['code'] != 200) {
+            this.showError(res['message']);
+            return;
+          }
+          const data: object = res['data'];
+          const content: any[] = data['content'];
+          this.papers = [];
+          for (let i = 0; i < content.length; i++) {
+            this.papers.push(new Paper(content[i]));
+          }
+          this.totalPages = data['totalPages'];
+          this.totalElements = data['totalElements'];
+        });
+    }
+  }
+
+  chooseTag(tag: Tag): void {
+    this.searchTag = tag;
+    this.currentPage = 1;
+    this.pageSize = 10;
+    this.totalPages = 0;
+    this.totalElements = 0;
+    this.searchPaper();
+  }
+
+  deleteTag(): void {
+    this.currentPage = 1;
+    this.pageSize = 10;
+    this.totalPages = 0;
+    this.totalElements = 0;
+    this.keywords = null;
+    this.type = Config.type_title;
+    this.searchTag = null;
+    this.searchPaper();
   }
 
   toggleAbstract(paper: Paper) {

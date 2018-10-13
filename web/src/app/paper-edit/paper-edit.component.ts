@@ -3,6 +3,7 @@ import { Config } from "../config";
 import { PaperService } from "../service/paper.service";
 import { LatexPaperInfo, Paper } from "../model/paper";
 import { MessageService } from "primeng/api";
+import { Tag } from "../model/tag";
 
 @Component({
   selector: 'app-paper-edit',
@@ -15,6 +16,9 @@ export class PaperEditComponent implements OnInit {
   paper: Paper;
 
   authorName: string;
+  tags: Tag[];
+  latexTag: Tag;
+  tag: Tag;
 
   latexInfo: LatexPaperInfo;
 
@@ -28,16 +32,29 @@ export class PaperEditComponent implements OnInit {
       publishTime: '',
       paperAbstract: '',
       publishJournal: '',
-      url: ''
+      url: '',
+      tags: []
     });
     this.latexInfo = new LatexPaperInfo({
       info: '',
       url: '',
-      paperAbstract: ''
+      paperAbstract: '',
+      tags: []
     });
   }
 
   ngOnInit() {
+    this.paperService.getTags()
+      .subscribe(res => {
+        if (res['code'] != 200) {
+          this.showError(res['message']);
+          return;
+        }
+        // console.log(res['data']);
+        this.tags = res['data'];
+        this.latexTag = this.tags[0];
+        this.tag = this.tags[0];
+      });
   }
 
   addAuthor(author: string): void {
@@ -55,6 +72,26 @@ export class PaperEditComponent implements OnInit {
     for (let i = 0; i < this.paper.authors.length; i++) {
       if (this.paper.authors[ i ] === author) {
         this.paper.authors.splice(i, 1);
+        break;
+      }
+    }
+  }
+
+  addTag(tag: Tag, content: Tag[]): void {
+    if (tag) {
+      for (let i = 0; i < content.length; i++) {
+        if (content[i] === tag) {
+          return;
+        }
+      }
+      content.push(tag);
+    }
+  }
+
+  deleteTag(tag: Tag, content: Tag[]): void {
+    for (let i = 0; i < content.length; i++) {
+      if (content[i] == tag) {
+        content.splice(i, 1);
         break;
       }
     }
@@ -97,9 +134,10 @@ export class PaperEditComponent implements OnInit {
     if (!Config.isValid(this.latexInfo.url)) {
       this.showError("URL cannot be empty!");
     }
+    console.log(this.latexInfo);
     this.paperService.uploadLatexInfo(this.latexInfo)
       .subscribe(res => {
-        console.log(res);
+        // console.log(res);
         if (res['code'] != 200) {
           this.showError(res['message']);
           return;

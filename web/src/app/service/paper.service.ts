@@ -4,6 +4,7 @@ import { Observable, of } from "rxjs";
 import { LatexPaperInfo, Paper } from "../model/paper";
 import { Config } from "../config";
 import { catchError } from "rxjs/operators";
+import { Tag } from "../model/tag";
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,16 @@ export class PaperService {
     }).pipe(
       catchError(this.handleError('getPapers', {}))
     );
+  }
+
+  getPapersByTag(tag: Tag, currentPage: number, pageSize: number): Observable<object> {
+    const url: string = `${Config.base_url}/api/paper/findByTag?tagId=${tag.id}&currentPage=${currentPage}&pageSize=${pageSize}`;
+    return this.http.get(url, {
+      responseType: 'json',
+      withCredentials: true
+    }).pipe(
+      catchError(this.handleError('getPaperByTag', {}))
+    )
   }
 
   uploadPaper(paper: Paper): Observable<object> {
@@ -58,6 +69,16 @@ export class PaperService {
       withCredentials: true
     }).pipe(
       catchError(this.handleError('checkTitle', {}))
+    );
+  }
+
+  getTags(): Observable<object> {
+    const url: string = `${Config.base_url}/api/tag/findAll`;
+    return this.http.get(url, {
+      responseType: 'json',
+      withCredentials: true
+    }).pipe(
+      catchError(this.handleError('getTags', {}))
     );
   }
 
