@@ -30,12 +30,12 @@ public class PaperTemplateDao {
      * @param pageable 分页
      * @return
      */
-    public ResponsePage<Paper> findByAuthorsLike(String authors, Pageable pageable) {
+    public ResponsePage<Paper> findByTypeAndAuthorsLike(Integer type, String authors, Pageable pageable) {
         ResponsePage<Paper> responsePage = new ResponsePage<>(pageable.getPageNumber()+1, pageable.getPageSize());
 
         Query query = new Query();
         //不区分大小写
-        Criteria criteria = Criteria.where("authors").elemMatch(Criteria.where("name").regex(".*" +authors+ ".*", "i"));
+        Criteria criteria = Criteria.where("type").is(type).and("authors").elemMatch(Criteria.where("name").regex(".*" +authors+ ".*", "i"));
         query.addCriteria(criteria);
 
         //计算总数

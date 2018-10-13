@@ -40,20 +40,21 @@ public class PaperServiceImpl implements PaperService {
      * 分页查询所有论文，按时间倒序排列
      */
     @Override
-    public ResponsePage<Paper> findPageByKeyword(Integer type, String keywords, Integer currentPage, Integer pageSize) {
+    public ResponsePage<Paper> findPageByKeyword(Integer researchType, Integer searchType, String keywords, Integer currentPage, Integer pageSize) {
         PageRequest pageable = buildPageRequest(currentPage, pageSize, null);
         ResponsePage<Paper> responsePage = new ResponsePage<>(currentPage, pageSize);
         if(keywords == null || "".equals(keywords)){
-            Page<Paper> result = paperDao.findAll(pageable);
+            //Page<Paper> result = paperDao.findAll(pageable);
+            Page<Paper> result = paperDao.findByType(researchType, pageable);
             BeanUtils.copyProperties(result, responsePage);
             return responsePage;
-        }else if(type.equals(Constants.SEARCH_TYPE_TITLE)){
+        }else if(searchType.equals(Constants.SEARCH_TYPE_TITLE)){
             //不区分大小写
-            Page<Paper> result =  paperDao.findBySearchTitleLike(keywords.toLowerCase(), pageable);
+            Page<Paper> result =  paperDao.findByTypeAndSearchTitleLike(researchType, keywords.toLowerCase(), pageable);
             BeanUtils.copyProperties(result, responsePage);
             return responsePage;
-        }else if(type.equals(Constants.SEARCH_TYPE_AUTHOR)){
-            return paperTemplate.findByAuthorsLike(keywords, pageable);
+        }else if(searchType.equals(Constants.SEARCH_TYPE_AUTHOR)){
+            return paperTemplate.findByTypeAndAuthorsLike(researchType, keywords, pageable);
         }
         return null;
     }
@@ -62,9 +63,9 @@ public class PaperServiceImpl implements PaperService {
      * 搜索论文标题是否已存在
      */
     @Override
-    public List<Paper> isExistTitle(String title) {
+    public List<Paper> isExistTitle(Integer type, String title) {
         title = title.trim();
-        return paperDao.findBySearchTitle(title);
+        return paperDao.findByTypeAndSearchTitle(type, title);
     }
 
     /**
@@ -75,10 +76,10 @@ public class PaperServiceImpl implements PaperService {
      * @return
      */
     @Override
-    public ResponsePage<Paper> findByTag(String tagId, Integer currentPage, Integer pageSize) {
+    public ResponsePage<Paper> findByTypeAndTag(Integer type, String tagId, Integer currentPage, Integer pageSize) {
         PageRequest pageable = buildPageRequest(currentPage, pageSize, null);
         ResponsePage<Paper> responsePage = new ResponsePage<>(currentPage, pageSize);
-        Page<Paper> result = paperDao.findByTagsIdIn(tagId, pageable);
+        Page<Paper> result = paperDao.findByTypeAndTagsIdIn(type, tagId, pageable);
         BeanUtils.copyProperties(result, responsePage);
         return responsePage;
     }

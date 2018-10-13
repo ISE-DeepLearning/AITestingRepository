@@ -21,24 +21,38 @@ public interface PaperDao extends MongoRepository<Paper, String> {
 
     /**
      * 根据标题模糊匹配
+     * @param type 研究方向
      * @param searchTitle 标题关键字
      * @param pageable 分页
      * @return
      */
-    Page<Paper> findBySearchTitleLike(String searchTitle, Pageable pageable);
+    Page<Paper> findByTypeAndSearchTitleLike(Integer type, String searchTitle, Pageable pageable);
 
     /**
      * 搜索论文标题是否已存在
+     *
+     * @param type
      * @param searchTitle
      * @return
      */
-    List<Paper> findBySearchTitle(String searchTitle);
+    List<Paper> findByTypeAndSearchTitle(Integer type, String searchTitle);
 
     /**
      * 按标签搜索论文集
+     *
      * @param tagId
      * @param pageable
      * @return
      */
-    Page<Paper> findByTagsIdIn(String tagId, Pageable pageable);
+    Page<Paper> findByTypeAndTagsIdIn(Integer type, String tagId, Pageable pageable);
+
+    /**
+     * 根据研究方向类型查找论文
+     *
+     * @param type     研究方向
+     * @param pageable
+     * @return
+     */
+    Page<Paper> findByType(Integer type, Pageable pageable);
+
 }

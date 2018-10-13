@@ -22,6 +22,9 @@ public class PaperCommand {
     //标题
     private String title;
 
+    //研究方向类型
+    private Integer type;
+
     //作者
     private List<String> authors;
 
@@ -36,6 +39,9 @@ public class PaperCommand {
 
     //摘要
     private String paperAbstract;
+
+    //bibTex
+    private String bibString;
 
     //标签
     private List<Tag> tags;

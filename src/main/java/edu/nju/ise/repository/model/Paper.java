@@ -25,6 +25,9 @@ public class Paper {
     @Id
     private String id;
 
+    //研究方向类型
+    private Integer type;
+
     //标题
     private String title;
 
@@ -49,6 +52,10 @@ public class Paper {
     //摘要
     @Field("paper_abstract")
     private String paperAbstract;
+
+    //bibTex
+    @Field("bib_string")
+    private String bibString;
 
     //标签
     private List<Tag> tags;

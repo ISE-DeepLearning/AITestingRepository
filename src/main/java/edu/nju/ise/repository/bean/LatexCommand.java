@@ -33,6 +33,9 @@ public class LatexCommand {
     */
     private String info;
 
+    //研究方向类型
+    private Integer researchType;
+
     // 摘要
     private String paperAbstract;
 
@@ -41,6 +44,9 @@ public class LatexCommand {
 
     //标签
     private List<Tag> tags;
+
+    //bibTex
+    private String bibString;
 
 
     public Paper parsePaper(){
@@ -57,6 +63,8 @@ public class LatexCommand {
             Author author = new Author(name.trim());
             authorList.add(author);
         }
+
+        paper.setType(researchType);
         paper.setAuthors(authorList);
         paper.setPublishTime(year);
         paper.setPublishJournal(StringUtils.isEmpty(journal) ? bookTitle : journal);
@@ -65,6 +73,7 @@ public class LatexCommand {
         paper.setPaperAbstract(paperAbstract);
         paper.setUrl(url);
         paper.setTags(tags);
+        paper.setBibString(info);
         return paper;
     }
 

@@ -30,22 +30,22 @@ public class TagController {
     /**
      * 提交标签
      * @param name 标签名
-     * @param type 研究方向类型
+     * @param researchType 研究方向类型
      * @param request
      * @return
      */
     @PostMapping
     @RequestMapping("create")
-    public ResponseData createTag(@RequestParam String name, Integer type, HttpServletRequest request){
-        if(type == null || type > 5){
-            type = ResearchType.AI_TEST.getId();
+    public ResponseData createTag(@RequestParam String name, @RequestParam Integer researchType, HttpServletRequest request){
+        if(researchType == null || researchType > 5){
+            researchType = ResearchType.AI_TEST.getId();
         }
         //判断标签是否存在
-        List<Tag> tagList = tagService.isExistTag(type, name);
+        List<Tag> tagList = tagService.isExistTag(researchType, name);
         if(!CollectionUtils.isEmpty(tagList)){
             return ResponseData.badRequest("标签已存在");
         }
-        Integer row = tagService.createTag(type, name);
+        Integer row = tagService.createTag(researchType, name);
         return row == 1 ? ResponseData.ok(null) : ResponseData.badRequest("创建标签失败！");
     }
 
@@ -62,12 +62,12 @@ public class TagController {
 
     /**
      * 按研究方向查询tag
-     * @param type 研究方向类型
+     * @param researchType 研究方向类型
      */
     @GetMapping
     @RequestMapping("findByType")
-    public ResponseData findByType(@RequestParam Integer type){
-        List<Tag> tagList = tagService.findByType(type);
+    public ResponseData findByType(@RequestParam Integer researchType){
+        List<Tag> tagList = tagService.findByType(researchType);
         return ResponseData.ok(tagList);
     }
 
