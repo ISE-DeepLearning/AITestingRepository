@@ -84,6 +84,16 @@ public class PaperServiceImpl implements PaperService {
         return responsePage;
     }
 
+    /**
+     * 按类型搜索全部论文
+     * @param researchType 研究方向
+     * @return
+     */
+    @Override
+    public List<Paper> findAllByType(Integer type) {
+        return paperDao.findByType(type);
+    }
+
 
     /**
      *  创建分页请求.

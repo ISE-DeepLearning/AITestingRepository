@@ -50,4 +50,12 @@ public interface PaperService {
      * @return
      */
     ResponsePage<Paper> findByTypeAndTag(Integer type, String tagId, Integer currentPage, Integer pageSize);
+
+    /**
+     * 按类型搜索全部论文
+     * @param researchType
+     * @return
+     */
+    List<Paper> findAllByType(Integer researchType);
+
 }

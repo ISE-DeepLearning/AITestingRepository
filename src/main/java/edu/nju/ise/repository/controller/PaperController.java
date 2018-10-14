@@ -6,11 +6,16 @@ import edu.nju.ise.repository.bean.ResponseData;
 import edu.nju.ise.repository.bean.ResponsePage;
 import edu.nju.ise.repository.model.Paper;
 import edu.nju.ise.repository.service.PaperService;
+import edu.nju.ise.repository.util.FileUtil;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -126,5 +131,35 @@ public class PaperController {
         List<Paper> paperList = paperService.isExistTitle(researchType, title);
         return CollectionUtils.isEmpty(paperList) ? ResponseData.ok(0) : ResponseData.ok(paperList.size());
     }
+
+
+    /**
+     * 下载引用的论文库
+     * @param researchType
+     */
+    @GetMapping
+    @RequestMapping("download")
+    public void downloadBib(@RequestParam Integer researchType, HttpServletResponse response){
+        List<Paper> paperList = paperService.findAllByType(researchType);
+        List<String> bibList = paperList.stream().map(Paper::getBibString).collect(Collectors.toList());
+        String name = "paper_" + researchType + ".bib";
+        FileUtil.writeFile(name, bibList);
+
+        try (
+                InputStream inputStream = new FileInputStream(new File(name));
+                OutputStream outputStream = response.getOutputStream()
+        ) {
+            //指明为下载
+            response.setContentType("application/x-download");
+            response.addHeader("Content-Disposition", "attachment;fileName=" + name);   // 设置文件名
+            //把输入流copy到输出流
+            IOUtils.copy(inputStream, outputStream);
+            outputStream.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 }

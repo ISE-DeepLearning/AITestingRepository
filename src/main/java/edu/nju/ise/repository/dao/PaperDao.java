@@ -47,12 +47,12 @@ public interface PaperDao extends MongoRepository<Paper, String> {
     Page<Paper> findByTypeAndTagsIdIn(Integer type, String tagId, Pageable pageable);
 
     /**
-     * 根据研究方向类型查找论文
-     *
+     * 根据研究方向类型分页查找论文
      * @param type     研究方向
      * @param pageable
      * @return
      */
     Page<Paper> findByType(Integer type, Pageable pageable);
 
+    List<Paper> findByType(Integer type);
 }
