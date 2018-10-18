@@ -28,6 +28,10 @@ public class Paper {
     //研究方向类型
     private Integer type;
 
+    //cite的内容
+    @Field("cite_key")
+    private String citeKey;
+
     //标题
     private String title;
 

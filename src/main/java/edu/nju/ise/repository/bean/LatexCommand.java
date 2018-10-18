@@ -36,6 +36,9 @@ public class LatexCommand {
     //研究方向类型
     private Integer researchType;
 
+    //cite的内容
+    private String citeKey;
+
     // 摘要
     private String paperAbstract;
 
@@ -56,6 +59,7 @@ public class LatexCommand {
         String journal = getProperty("journal", info);
         String bookTitle = getProperty("booktitle", info);
         String year = getProperty("year", info);
+        String cite = info.substring(info.indexOf('{')+1, info.indexOf(','));
 
         String[] authors = authorStr.split("and");
         List<Author> authorList = new ArrayList<>();
@@ -64,6 +68,7 @@ public class LatexCommand {
             authorList.add(author);
         }
 
+        paper.setCiteKey(cite);
         paper.setType(researchType);
         paper.setAuthors(authorList);
         paper.setPublishTime(year);
