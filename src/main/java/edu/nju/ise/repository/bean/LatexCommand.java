@@ -52,7 +52,7 @@ public class LatexCommand {
     private String bibString;
 
 
-    public Paper parsePaper(){
+    public Paper parsePaper() throws StringIndexOutOfBoundsException{
         Paper paper = new Paper();
         String title = getProperty("title", info);
         String authorStr = getProperty("author", info).replace(",", "").trim();

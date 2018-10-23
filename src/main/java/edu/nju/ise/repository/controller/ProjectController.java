@@ -37,6 +37,9 @@ public class ProjectController {
     @PostMapping
     @RequestMapping("create")
     public ResponseData createProject(@RequestBody Project project, HttpServletRequest request){
+        if(project == null || project.getType() == null){
+            return ResponseData.badRequest("参数不能为空。");
+        }
         project.setSearchTitle(project.getTitle().toLowerCase());
 
         //判断项目是否存在

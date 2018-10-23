@@ -65,10 +65,15 @@ public class PaperController {
     @RequestMapping("latexcreate")
     public ResponseData latexCreate(@RequestBody LatexCommand latexCommand, HttpServletRequest request) {
         System.out.println(JSON.toJSONString(latexCommand));
-        if(latexCommand == null){
+        if(latexCommand == null || latexCommand.getResearchType() == null){
             return ResponseData.badRequest("参数不能为空。");
         }
-        Paper paper = latexCommand.parsePaper();
+        Paper paper;
+        try {
+            paper = latexCommand.parsePaper();
+        }catch (StringIndexOutOfBoundsException e){
+            return ResponseData.badRequest("BibTex格式解析错误");
+        }
         System.out.println(JSON.toJSONString(paper));
         //判断论文是否存在
         List<Paper> paperList = paperService.isExistTitle(paper.getType(), paper.getSearchTitle());
